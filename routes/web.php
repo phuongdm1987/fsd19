@@ -12,3 +12,5 @@
 */
 
 Route::get('/', 'BlogController@index')->name('home');
+Route::get('/post/{post}-{slug}', 'BlogController@show')->name('posts.show');
+Route::get('/search', 'SearchController@index')->name('quickSearch');

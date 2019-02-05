@@ -23,7 +23,7 @@
             <section class="info-post">
                 <h3 class="title-post"><a href="{{ $p->url() }}" title="{{ $p->title }}" class="link-title">{{ $p->title }}</a></h3>
                 <p class="teaser-post">
-                    {{ Str::words(strip_tags($p->content), 60) }}
+                    {{ str_limit(strip_tags($p->content), 60) }}
                 </p>
                 <p class="tag-post">
                     {{ $p->getTags() != "" ? '<strong><i class="fa fa-tags"></i> Tags</strong>:' . $p->getTags() : "" }}
@@ -38,7 +38,7 @@
     </section>
 
 	<section class="fsd-pagination">
-		{{ $posts->appends(Input::all())->links() }}
+		{{ $posts->appends(request()->all())->links() }}
 	</section>
 @empty
 	<section class="fsd-box rs-filter">

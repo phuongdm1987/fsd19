@@ -9,5 +9,5 @@
 @endsection
 
 @section('right_sidebar')
-    @include('frontend/includes/top-recommenced')
+    @include('commons/top-recommenced')
 @endsection

@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace App\Http\Controllers;
 
 use App\Jobs\GetRecommendPosts;
+use App\Jobs\GetTopPosts;
 use Henry\Domain\Post\Post;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -24,8 +25,9 @@ class BlogController extends WebController
 
         $type = '';
         $posts = GetRecommendPosts::dispatchNow();
+        $topPosts = GetTopPosts::dispatchNow();
 
-        return view('blog', compact('type', 'posts'));
+        return view('blog', compact('type', 'posts', 'topPosts'));
     }
 
     public function show(Post $post, $slug)

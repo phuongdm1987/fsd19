@@ -58,4 +58,19 @@ class EloquentPostRepository extends AbstractEloquentRepository implements PostR
             'order' => 'desc'
         ], $perPage);
     }
+
+    /**
+     * @return Collection
+     */
+    public function getTopPosts(): Collection
+    {
+        return $this->model
+            ->where('active', Post::PUBLISHED)
+            ->where('hot', 1)
+            ->where('schedule_post' , '<=', time())
+            ->orderBy('created_at', 'desc')
+            ->take(5)
+            ->get();
+
+    }
 }

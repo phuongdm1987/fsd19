@@ -19,4 +19,9 @@ interface PostRepositoryInterface extends RepositoryInterface
      * @return LengthAwarePaginator
      */
     public function getRecommendPosts(int $perPage = 10): LengthAwarePaginator;
+
+    /**
+     * @return Collection
+     */
+    public function getTopPosts(): Collection;
 }

@@ -55,21 +55,17 @@
 </form>
 
 <!-- Navigation -->
-@include('/frontend/includes/navigation')
+@include('commons/navigation')
 
 @if($type == 'user')
     @include('/frontend/user-wall/header-wall')
 @endif
 
 <section id="content" class="container-fluid">
-    <!-- Left sidebar -->
-{{-- <section class="left-side col-md-2 col-sm-2 hidden-xs">
-    @yield('left_sidebar')
-</section> --}}
 
 <!-- Main content -->
     <section class="main-side col-sm-9">
-    @include('frontend/notifications')
+    @include('commons/notifications')
     <!-- Content -->
         @yield('content')
     </section>

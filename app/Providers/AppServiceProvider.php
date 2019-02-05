@@ -3,12 +3,18 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
+use Henry\Domain\Category\Filters\CategoryFilterInterface;
+use Henry\Domain\Category\Repositories\CategoryRepositoryInterface;
+use Henry\Domain\Category\Sorters\CategorySorterInterface;
 use Henry\Domain\Post\Filters\PostFilterInterface;
 use Henry\Domain\Post\Repositories\PostRepositoryInterface;
 use Henry\Domain\Post\Sorters\PostSorterInterface;
 use Henry\Domain\Tag\Filters\TagFilterInterface;
 use Henry\Domain\Tag\Repositories\TagRepositoryInterface;
 use Henry\Domain\Tag\Sorters\TagSorterInterface;
+use Henry\Infrastructure\Category\Filters\EloquentCategoryFilter;
+use Henry\Infrastructure\Category\Repositories\EloquentCategoryRepository;
+use Henry\Infrastructure\Category\Sorters\EloquentCategorySorter;
 use Henry\Infrastructure\Post\Filters\EloquentPostFilter;
 use Henry\Infrastructure\Post\Repositories\EloquentPostRepository;
 use Henry\Infrastructure\Post\Sorters\EloquentPostSorter;
@@ -31,6 +37,10 @@ class AppServiceProvider extends ServiceProvider
         PostRepositoryInterface::class => EloquentPostRepository::class,
         PostFilterInterface::class => EloquentPostFilter::class,
         PostSorterInterface::class => EloquentPostSorter::class,
+
+        CategoryRepositoryInterface::class => EloquentCategoryRepository::class,
+        CategoryFilterInterface::class => EloquentCategoryFilter::class,
+        CategorySorterInterface::class => EloquentCategorySorter::class,
     ];
 
     /**

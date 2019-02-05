@@ -6,6 +6,7 @@ namespace Henry\Domain\Category;
 use Henry\Domain\Post\Post;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * Class Category
@@ -51,5 +52,13 @@ class Category extends Model
     public function url(): string
     {
         return '/danh-muc/' . $this->id . '-' . str_slug($this->getName(), '-', 'vi');
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function children(): HasMany
+    {
+        return $this->hasMany(self::class, 'parents');
     }
 }

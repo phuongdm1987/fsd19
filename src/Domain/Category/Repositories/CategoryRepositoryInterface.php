@@ -13,5 +13,8 @@ use Illuminate\Database\Eloquent\Collection;
  */
 interface CategoryRepositoryInterface extends RepositoryInterface
 {
-
+    /**
+     * @return Collection
+     */
+    public function getParents(): Collection;
 }

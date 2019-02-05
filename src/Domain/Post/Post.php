@@ -43,6 +43,36 @@ class Post extends Model
     }
 
     /**
+     * Return the post thumbnail image url.
+     *
+     * @return string
+     */
+    public function thumbnail($type = ''): string
+    {
+        return $this->thumbnail !== null
+            ? '/images/' . $type . $this->thumbnail
+            : '/assets/img/150x150.gif';
+    }
+
+    /**
+     * Return list tag with their link
+     * @return string
+     */
+    public function getTags(): string
+    {
+        $tag_list = [];
+        if (!$this->tags) {
+            return '';
+        }
+
+        foreach ($this->tags as $tag) {
+            $tag_list[] = '<a href="/tag/' . $tag->slug .'" title="' . $tag->name . '">' . $tag->name . '</a>';
+        }
+
+        return implode(' ', $tag_list);
+    }
+
+    /**
      * @return BelongsTo
      */
     public function category(): BelongsTo

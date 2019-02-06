@@ -25,23 +25,24 @@
                 <p class="teaser-post">
                     {{ str_limit(strip_tags($p->content), 60) }}
                 </p>
-                <p class="tag-post">
-                    {{ $p->getTags() != "" ? '<strong><i class="fa fa-tags"></i> Tags</strong>:' . $p->getTags() : "" }}
-                </p>
+                @if($p->relationTags)
+                    <p class="tag-post">
+                        <strong><i class="fa fa-tags"></i> Tags</strong>: {!! $p->getTags() !!}
+                    </p>
+                @endif
             </section>
         </section>
 
         <section class="main-bot">
-            <button class="btn btn-recommend btn-sm pull-left fsd-btn-recommend" data-token="{{ csrf_token() }}" data-post="{{ $p->id }}"><i class="fa {{ isset($recommends[$p->id]) ? 'fa-heart fsd-heart' : 'fa-heart-o' }}"></i> Recommend</button>
+            <button class="btn btn-recommend btn-sm pull-left fsd-btn-recommend" data-token="{{ csrf_token() }}" data-post="{{ $p->id }}"><i class="fa {{ $p->isFavorite() ? 'fa-heart fsd-heart' : 'fa-heart-o' }}"></i> Recommend</button>
             <p class="clearfix"></p>
         </section>
     </section>
-
-	<section class="fsd-pagination">
-		{{ $posts->appends(request()->all())->links() }}
-	</section>
 @empty
 	<section class="fsd-box rs-filter">
 		<h4>Không tìm thấy bài viết!</h4>
 	</section>
 @endforelse
+<section class="fsd-pagination">
+    {{ $posts->appends(request()->all())->links() }}
+</section>

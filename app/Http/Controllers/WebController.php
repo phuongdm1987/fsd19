@@ -25,13 +25,10 @@ class WebController extends Controller
 
     /**
      * WebController constructor.
-     * @param TagRepositoryInterface $tagRepository
-     * @param CategoryRepositoryInterface $categoryRepository
      */
-    public function __construct(
-        TagRepositoryInterface $tagRepository,
-        CategoryRepositoryInterface $categoryRepository
-    ) {
+    public function __construct() {
+        $tagRepository = app(TagRepositoryInterface::class);
+        $categoryRepository = app(CategoryRepositoryInterface::class);
 
         $this->metadata = new Metadata;
         View::share('metadata', $this->metadata);
@@ -39,7 +36,7 @@ class WebController extends Controller
         $tags = $tagRepository->getTagCountArticles(9);
         View::share('tags', $tags);
 
-        $categories = $categoryRepository->getParents();
+        $categories = $categoryRepository->getParents()->load('children.children');
         View::share('categories', $categories);
     }
 }

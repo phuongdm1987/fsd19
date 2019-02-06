@@ -33,7 +33,7 @@ class GetRecommendPosts implements ShouldQueue
     public function handle(PostRepositoryInterface $postRepository): LengthAwarePaginator
     {
         $posts = $postRepository->getRecommendPosts();
-        $posts->load('author', 'category', 'tags');
+        $posts->load('author', 'category', 'relationTags', 'favoriteUsers');
 
         return $posts;
     }

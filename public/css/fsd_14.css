@@ -1,0 +1,28 @@
+.fsd-box .breadcrumb {
+	margin: 0;
+	background-color: transparent;
+}
+.text-note {
+	font-size: 11px;
+	padding: 10px 0px;
+	margin: 0;
+}
+.pdetail-btn-recommend, .pdetail-btn-recommend:hover, .pdetail-btn-recommend:active, .pdetail-btn-recommend:visited, .pdetail-btn-recommend:focus {
+	background: #222F3D;
+	color: #fff;
+	border-radius: 2px;
+	padding: 2px 8px 1px;
+	font-size: 12px;
+	margin-right: 4px;
+	display: block;
+	font-weight: bold;
+	text-decoration: none;
+	margin-bottom: 10px;
+	border: none;
+}
+.pdetail-btn-recommend:hover {
+	background: #2C425A;
+}
+.fsd-heart {
+	color: #E74C3C;
+}

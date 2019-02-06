@@ -17,5 +17,3 @@ Route::get('/post/{post}-{slug}', 'BlogController@show')->name('posts.show');
 Route::get('/search', 'SearchController@index')->name('quickSearch');
 
 Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');

@@ -21,13 +21,13 @@
     <meta name="twitter:title" content="{{ $metadata->getFullTitle() }}">
     <meta name="twitter:description" content="{{ $metadata->getDescription() }}">
     <meta name="twitter:creator" content="@fsd14">
-    <link rel="icon" href="{{ asset('assets/ico/favicon16.gif') }}" type="image/gif" sizes="16x16">
-    <link rel="icon" href="{{ asset('assets/ico/favicon32.gif') }}" type="image/gif" sizes="32x32">
+    <link rel="icon" href="{{ asset('ico/favicon16.gif') }}" type="image/gif" sizes="16x16">
+    <link rel="icon" href="{{ asset('ico/favicon32.gif') }}" type="image/gif" sizes="32x32">
 
-    <link href="{{ asset('assets/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
-    <link href="{{ asset('assets/css/jquery.sidr.light.css') }}" rel="stylesheet">
-    <link href="{{ asset('assets/css/fsd14.css') }}" rel="stylesheet">
-    <link href="{{ asset('assets/css/fsd_14.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('css/jquery.sidr.light.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/fsd14.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/fsd_14.css') }}" rel="stylesheet">
 
     <!-- Custom Fonts -->
     <link href='http://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
@@ -44,9 +44,6 @@
 </head>
 
 <body class="{{ Request::is('post/*') ? 'bg-white' : '' }}">
-{{-- <section id="event-comming">
-    @include ('frontend/layouts/event')
-</section> --}}
 <form action="{{route('quickSearch')}}" method="get" id="search-form-top" class="form-inline search-form hidden-xs hidden-md">
     <div>
         <i class="fa fa-search"></i>
@@ -86,14 +83,14 @@
     </div>
 </footer>
 <a href="#" class="scrollToTop"><i class="fa fa-angle-up fa-2x"></i></a>
-<script type="text/javascript" src="{{ asset('assets/js/jquery.js') }}"></script>
-<script type="text/javascript" src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
-<script src="{{ asset('assets/js/prettify.js') }}"></script>
-<script src="{{ asset('assets/js/jquery.plugin.min.js') }}"></script>
-<script src="{{ asset('assets/js/jquery.sidr.min.js') }}"></script>
-<script src="{{ asset('assets/js/app.js') }}"></script>
-<script src="{{ asset('assets/js/recommend.js') }}"></script>
-<script src="{{ asset('assets/js/recommend.handler.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/jquery.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/bootstrap.min.js') }}"></script>
+<script src="{{ asset('js/prettify.js') }}"></script>
+<script src="{{ asset('js/jquery.plugin.min.js') }}"></script>
+<script src="{{ asset('js/jquery.sidr.min.js') }}"></script>
+<script src="{{ asset('js/app14.js') }}"></script>
+<script src="{{ asset('js/recommend.js') }}"></script>
+<script src="{{ asset('js/recommend.handler.js') }}"></script>
 @yield('scripts')
 </body>
 </html>

@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace Henry\Domain\Post;
 
-use App\User;
+use Henry\Domain\User\User;
 use Henry\Domain\Category\Category;
 use Henry\Domain\Tag\Tag;
 use Illuminate\Database\Eloquent\Model;
@@ -61,15 +61,24 @@ class Post extends Model
     public function getTags(): string
     {
         $tag_list = [];
-        if (!$this->tags) {
-            return '';
-        }
 
-        foreach ($this->tags as $tag) {
+        foreach ($this->relationTags as $tag) {
             $tag_list[] = '<a href="/tag/' . $tag->slug .'" title="' . $tag->name . '">' . $tag->name . '</a>';
         }
 
         return implode(' ', $tag_list);
+    }
+
+    /**
+     * @return bool
+     */
+    public function isFavorite(): bool
+    {
+        if (!auth()->check()) {
+            return false;
+        }
+
+        return $this->favoriteUsers->contains('id', auth()->id());
     }
 
     /**
@@ -91,8 +100,16 @@ class Post extends Model
     /**
      * @return BelongsToMany
      */
-    public function tags(): BelongsToMany
+    public function favoriteUsers(): BelongsToMany
     {
-        return $this->belongsToMany(Tag::class, 'post_tags', 'post_id');
+        return $this->belongsToMany(User::class, 'recommend_posts', 'post_id', 'user_id');
+    }
+
+    /**
+     * @return BelongsToMany
+     */
+    public function relationTags(): BelongsToMany
+    {
+        return $this->belongsToMany(Tag::class, 'post_tags');
     }
 }

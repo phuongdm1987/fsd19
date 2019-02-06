@@ -1,73 +1,92 @@
-@extends('layouts.app')
+@extends('layouts/auth')
+
+{{-- Page title --}}
+@section('title')
+    Đăng nhập ::
+    @parent
+@stop
+
+@section('styles')
+    <style>
+        body {
+            background-color: #f2f2f2;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+@stop
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Login') }}</div>
 
-                <div class="card-body">
-                    <form method="POST" action="{{ route('login') }}">
-                        @csrf
+    <form action="" method="POST" autocomplete="off" role="form">
+        <section class="col-sm-4 col-sm-offset-4" id="login-container">
+            <!-- Notifications -->
+            @include('commons/notifications')
 
-                        <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+            <section id="login-logo">
+                <a href="/" title="{{ $metadata->getOwner() }}">{{ $metadata->getOwner() }}</a> . Being a full-stack developer
+            </section>
 
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required autofocus>
+            <section class="form-group" id="signup-intro">
+                <h3>Đăng nhập</h3>
+            </section>
 
-                                @if ($errors->has('email'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
+            @if (isset($error))
+                <p>{{ $error }}</p>
+        @endif
 
-                        <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
+        <!-- CSRF Token -->
+            <input type="hidden" name="_token" value="{{ csrf_token() }}" />
 
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>
+            <section class="form-group {{ $errors->has('email') ? 'has-error' : '' }}">
+                <label for="email">Email {{ $errors->first('email', '<span class="help-inline text-danger">:message</span>') }}</label>
+                <input type="text" class="form-control" name="email" id="email" autofocus value="{{ old('email') }}">
+            </section>
 
-                                @if ($errors->has('password'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
+            <section class="form-group {{ $errors->has('password') ? 'has-error' : '' }}">
+                <label for="password">Mật khẩu {{ $errors->first('password', '<span class="help-inline text-danger">:message</span>') }}</label>
+                <input type="password" class="form-control" name="password" id="password">
+            </section>
 
-                        <div class="form-group row">
-                            <div class="col-md-6 offset-md-4">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
+            <section class="form-group">
+                <label for="remember-me" class="checkbox">
+                    <input type="checkbox" name="remember-me" id="remember-me"> Giữ đăng nhập
+                </label>
+            </section>
 
-                                    <label class="form-check-label" for="remember">
-                                        {{ __('Remember Me') }}
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
+            <section class="form-group text-center">
+                <input type="submit" class="btn btn-danger btn-sm" value="Đăng nhập">
+                <a href="/" class="btn btn-default btn-sm">Trở lại</a>
+            </section>
 
-                        <div class="form-group row mb-0">
-                            <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Login') }}
-                                </button>
+            <section class="form-group">
+                <label for="remember-me" class="head_oath">
+                    Hoặc đăng nhập bằng:
+                </label>
+            </section>
 
-                                @if (Route::has('password.request'))
-                                    <a class="btn btn-link" href="{{ route('password.request') }}">
-                                        {{ __('Forgot Your Password?') }}
-                                    </a>
-                                @endif
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-@endsection
+            <section class="form-group text-center">
+                <a class="btn btn-social btn-facebook" href="/auth/facebook">
+                    <i class="fa fa-facebook"></i> Facebook
+                </a>
+                <a class="btn btn-social btn-google" href="/auth/google">
+                    <i class="fa fa-google"></i> Google
+                </a>
+                <a class="btn btn-social btn-github" href="/auth/github">
+                    <i class="fa fa-github"></i> Github
+                </a>
+            </section>
+
+        </section>
+        <p class="clearfix"></p>
+        <section class="col-sm-4 col-sm-offset-4 text-center">
+            <a href="{{ route('register') }}" class="btn btn-link" title="Tạo tài khoản mới">Tạo tài khoản mới</a> .
+            <a href="{{ route('password.request') }}" class="btn btn-link" title="Quên mật khẩu">Quên mật khẩu?</a>
+        </section>
+        <p class="clearfix"></p>
+        <section class="col-sm-4 col-sm-offset-4">
+            <h1 class="footer-logo-text"><a href="/" title="{{ $metadata->getOwner() }}">{{ $metadata->getOwner() }}</a></h1>
+            <p class="signup-footer">&copy; <?= date('Y') ?> {{ $metadata->getOwner() }}<sup>&reg;</sup> - Develop by <a style="color: #27ae60;" href="/">FSD.14</a>.</p>
+        </section>
+    </form>
+@stop

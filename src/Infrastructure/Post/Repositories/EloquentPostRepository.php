@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Henry\Infrastructure\Post\Repositories;
 
 
+use Henry\Domain\Category\Category;
 use Henry\Domain\Post\Post;
 use Henry\Domain\Post\Filters\PostFilterInterface;
 use Henry\Domain\Post\Repositories\PostRepositoryInterface;
@@ -60,17 +61,37 @@ class EloquentPostRepository extends AbstractEloquentRepository implements PostR
     }
 
     /**
+     * @param Category|null $category
      * @return Collection
      */
-    public function getTopPosts(): Collection
+    public function getTopPosts(Category $category = null): Collection
+    {
+        $query = $this->model
+            ->where('active', Post::PUBLISHED)
+            ->where('hot', 1)
+            ->where('schedule_post' , '<=', time());
+
+        if ($category) {
+            $query->where('category_id', $category->id);
+        }
+
+        return $query->orderBy('created_at', 'desc')
+            ->take(5)
+            ->get();
+    }
+
+    /**
+     * @param Post $post
+     * @return Collection
+     */
+    public function getRelatedPosts(Post $post): Collection
     {
         return $this->model
             ->where('active', Post::PUBLISHED)
-            ->where('hot', 1)
             ->where('schedule_post' , '<=', time())
+            ->whereIn('id', explode(',', $post->related_post))
             ->orderBy('created_at', 'desc')
             ->take(5)
             ->get();
-
     }
 }

@@ -57,6 +57,15 @@ class User extends Authenticatable
     }
 
     /**
+     * Return the user cover image url
+     * @return string
+     */
+    public function getCover(): string
+    {
+        return $this->cover ?? '/img/fsd14.com.jpg';
+    }
+
+    /**
      * Returns the user full name, it simply concatenates
      * the user first and last name.
      *

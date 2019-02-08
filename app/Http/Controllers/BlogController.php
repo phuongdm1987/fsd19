@@ -3,8 +3,11 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
-use App\Jobs\GetRecommendPosts;
-use App\Jobs\GetTopPosts;
+use App\Jobs\Category\GetCategoriesForBreadcrumb;
+use App\Jobs\Post\GetRecommendPosts;
+use App\Jobs\Post\GetRelatedPosts;
+use App\Jobs\Post\GetTopPosts;
+use App\Jobs\Post\IncrementViewPost;
 use Henry\Domain\Post\Post;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -27,7 +30,7 @@ class BlogController extends WebController
         $posts = GetRecommendPosts::dispatchNow();
         $topPosts = GetTopPosts::dispatchNow();
 
-        return view('blog', compact('type', 'posts', 'topPosts'));
+        return view('blog.index', compact('type', 'posts', 'topPosts'));
     }
 
     public function show(Post $post, $slug)
@@ -39,5 +42,26 @@ class BlogController extends WebController
             exit;
         }
 
+        // Increment views
+        IncrementViewPost::dispatchNow($post);
+        $breadcrumbs = GetCategoriesForBreadcrumb::dispatchNow($post->category);
+        $topPosts = GetTopPosts::dispatchNow($post->category);
+        $relatedPosts = GetRelatedPosts::dispatchNow($post);
+
+        // Metadata
+        $desc = str_limit(strip_tags($post->content), 30);
+        $desc = str_replace(["\n", '  '], [' ', ''], $desc);
+        $keywords = ['bài viết, thảo luận, hướng dẫn, kiến thức, hỏi đáp'];
+        $keywords = array_merge($keywords, $post->relationTags->pluck('name')->toArray());
+
+        $this->metadata->setTitle($post->title);
+        $this->metadata->setDescription($desc);
+        $this->metadata->appendKeywords($keywords);
+        $this->metadata->setOwner($post->author->nickname);
+
+        $type = '';
+
+        // Show the page
+        return view('blog.show', compact('post', 'breadcrumbs', 'topPosts', 'type', 'relatedPosts'));
     }
 }

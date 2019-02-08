@@ -15,7 +15,7 @@
     <meta property="og:title" content="{{ $metadata->getFullTitle() }}" />
     <meta property="og:description" content="{{ $metadata->getDescription() }}" />
     <meta property="og:site_name" content="{{ $metadata->getOwner() }}" />
-    <meta property="og:url" content="{{ URL::current() }}" />
+    <meta property="og:url" content="{{ url()->current() }}" />
     <meta name="twitter:card" content="summary">
     <meta name="twitter:site" content="@VNFSD ">
     <meta name="twitter:title" content="{{ $metadata->getFullTitle() }}">

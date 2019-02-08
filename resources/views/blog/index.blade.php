@@ -1,4 +1,4 @@
-@extends('layouts/default')
+@extends('layouts.default')
 
 @section('left_sidebar')
     @include('commons/left-topic')

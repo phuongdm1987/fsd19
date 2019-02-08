@@ -127,7 +127,7 @@ class Metadata
      * @param array $keywords
      * @param bool $force
      */
-    public function appendKeywords(array $keywords, bool $force = false): void
+    public function appendKeywords(array $keywords, bool $force = true): void
     {
         if ($force) {
             $this->keywords = $keywords;

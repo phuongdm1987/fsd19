@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Jobs;
+namespace App\Jobs\Post;
 
 use Henry\Domain\Post\Repositories\PostRepositoryInterface;
 use Illuminate\Bus\Queueable;
@@ -13,7 +13,7 @@ use Illuminate\Foundation\Bus\Dispatchable;
 
 /**
  * Class GetRecommendPosts
- * @package App\Jobs
+ * @package App\Jobs\Post
  */
 class GetRecommendPosts implements ShouldQueue
 {

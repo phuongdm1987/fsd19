@@ -5,6 +5,7 @@ namespace Henry\Domain\Category;
 
 use Henry\Domain\Post\Post;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
@@ -60,5 +61,13 @@ class Category extends Model
     public function children(): HasMany
     {
         return $this->hasMany(self::class, 'parents');
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    public function relationParent(): BelongsTo
+    {
+        return $this->belongsTo(self::class, 'parents');
     }
 }

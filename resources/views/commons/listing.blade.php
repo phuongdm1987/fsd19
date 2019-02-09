@@ -34,7 +34,11 @@
         </section>
 
         <section class="main-bot">
-            <button class="btn btn-recommend btn-sm pull-left fsd-btn-recommend" data-token="{{ csrf_token() }}" data-post="{{ $p->id }}"><i class="fa {{ $p->isFavorite() ? 'fa-heart fsd-heart' : 'fa-heart-o' }}"></i> Recommend</button>
+            @if(!auth()->check())
+                <a href="{{route('login')}}" class="btn btn-recommend btn-sm pull-left"><i class="fa {{ $p->isFavorite() ? 'fa-heart fsd-heart' : 'fa-heart-o' }}"></i> Recommend</a>
+            @else
+                <button class="btn btn-recommend btn-sm pull-left fsd-btn-recommend" data-token="{{ csrf_token() }}" data-post="{{ $p->id }}"><i class="fa {{ $p->isFavorite() ? 'fa-heart fsd-heart' : 'fa-heart-o' }}"></i> Recommend</button>
+            @endif
             <p class="clearfix"></p>
         </section>
     </section>

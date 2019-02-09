@@ -23,7 +23,7 @@ abstract class AbstractEloquentNormalFilter
     {
         $queryParam = array_get($conditions, $this->searchField);
 
-        if (!$queryParam) {
+        if (!$this->assertTrue($queryParam)) {
             return $queryBuilder;
         }
 
@@ -41,17 +41,21 @@ abstract class AbstractEloquentNormalFilter
     }
 
     /**
-     * @param array $queryParam
+     * @param mixed $queryParam
      * @return string
      */
-    private function assertExistOperator(array &$queryParam): string
+    private function assertExistOperator(&$queryParam): string
     {
+        if (!\is_array($queryParam)) {
+            return '=';
+        }
+
         $operators = ['<=', '>=', '=', '!='];
 
         $operator = (string)array_get($queryParam, 'operator', '');
 
         if (!$operator) {
-            return $operator;
+            return '=';
         }
 
         if (!\in_array($operator, $operators, true)) {
@@ -59,8 +63,17 @@ abstract class AbstractEloquentNormalFilter
         }
 
         array_forget($queryParam, 'operator');
-        $queryParam = \count($queryParam) <= 1 ? (string)$queryParam : $queryParam;
+        $queryParam = \count($queryParam) <= 1 ? (string)array_first($queryParam) : $queryParam;
 
         return $operator;
+    }
+
+    /**
+     * @param $queryParam
+     * @return mixed
+     */
+    protected function assertTrue($queryParam)
+    {
+        return $queryParam;
     }
 }

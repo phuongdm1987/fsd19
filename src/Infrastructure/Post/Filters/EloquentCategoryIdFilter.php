@@ -8,11 +8,11 @@ use Henry\Domain\Post\Filters\PostFilterInterface;
 use Henry\Infrastructure\AbstractEloquentNormalFilter;
 
 /**
- * Class EloquentRecommendFilter
+ * Class EloquentCategoryIdFilter
  * @package Henry\Infrastructure\Post\Filters
  */
-class EloquentRecommendFilter extends AbstractEloquentNormalFilter implements PostFilterInterface
+class EloquentCategoryIdFilter extends AbstractEloquentNormalFilter implements PostFilterInterface
 {
-    protected $searchField = 'recommend';
-    protected $field = 'recommend';
+    protected $searchField = 'category_id';
+    protected $field = 'category_id';
 }

@@ -40,12 +40,14 @@ class IncrementViewPost implements ShouldQueue
      */
     public function handle(): void
     {
-        $isSaveView = session('post_view:' . $this->post->id);
+        $key = 'post_view:' . $this->post->id;
+        $isSaveView = session($key);
         if ($isSaveView) {
             return;
         }
 
         ++$this->post->views;
         $this->post->save();
+        session([$key => true]);
     }
 }

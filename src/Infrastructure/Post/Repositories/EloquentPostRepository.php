@@ -9,7 +9,6 @@ use Henry\Domain\Post\Post;
 use Henry\Domain\Post\Filters\PostFilterInterface;
 use Henry\Domain\Post\Repositories\PostRepositoryInterface;
 use Henry\Domain\Post\Sorters\PostSorterInterface;
-use Henry\Domain\Post\ValueObjects\Type;
 use Henry\Infrastructure\AbstractEloquentRepository;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Collection;
@@ -66,18 +65,21 @@ class EloquentPostRepository extends AbstractEloquentRepository implements PostR
      */
     public function getTopPosts(Category $category = null): Collection
     {
-        $query = $this->model
-            ->where('active', Post::PUBLISHED)
-            ->where('hot', 1)
-            ->where('schedule_post' , '<=', time());
+        $conditions = [
+            'active' => Post::PUBLISHED,
+            'hot' => 1,
+            'schedule_post' => ['operator' => '<=', time()],
+            'orderBy' => 'created_at',
+            'order' => 'desc'
+        ];
 
         if ($category) {
-            $query->where('category_id', $category->id);
+            $conditions['category_id'] =$category->id;
         }
 
-        return $query->orderBy('created_at', 'desc')
-            ->take(5)
-            ->get();
+        $query = $this->generateQueryBuilder($conditions);
+
+        return $query->take(5)->get();
     }
 
     /**
@@ -86,12 +88,16 @@ class EloquentPostRepository extends AbstractEloquentRepository implements PostR
      */
     public function getRelatedPosts(Post $post): Collection
     {
-        return $this->model
-            ->where('active', Post::PUBLISHED)
-            ->where('schedule_post' , '<=', time())
-            ->whereIn('id', explode(',', $post->related_post))
-            ->orderBy('created_at', 'desc')
-            ->take(5)
-            ->get();
+        $conditions = [
+            'active' => Post::PUBLISHED,
+            'schedule_post' => ['operator' => '<=', time()],
+            'id' => explode(',', $post->related_post),
+            'orderBy' => 'created_at',
+            'order' => 'desc'
+        ];
+
+        $query = $this->generateQueryBuilder($conditions);
+
+        return $query->take(5)->get();
     }
 }

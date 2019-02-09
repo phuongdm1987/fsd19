@@ -13,5 +13,8 @@ use Henry\Infrastructure\AbstractEloquentFilter;
  */
 class EloquentCategoryFilter extends AbstractEloquentFilter implements CategoryFilterInterface
 {
-
+    protected $filters = [
+        EloquentActiveFilter::class,
+        EloquentParentIdFilter::class,
+    ];
 }

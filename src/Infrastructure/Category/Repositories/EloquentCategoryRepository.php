@@ -48,11 +48,11 @@ class EloquentCategoryRepository extends AbstractEloquentRepository implements C
      */
     public function getParents(): Collection
     {
-        return $this->model
-            ->where('parents', 0)
-            ->where('active', 1)
-            ->orderBy('name')
-            ->orderByDesc('id')
-            ->get();
+        return $this->all([
+            'parent_id' => 0,
+            'active' => 1,
+            'orderBy' => 'name',
+            'order' => 'asc'
+        ]);
     }
 }

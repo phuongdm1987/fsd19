@@ -13,5 +13,12 @@ use Henry\Infrastructure\AbstractEloquentFilter;
  */
 class EloquentPostFilter extends AbstractEloquentFilter implements PostFilterInterface
 {
-
+    protected $filters = [
+        EloquentIdFilter::class,
+        EloquentRecommendFilter::class,
+        EloquentActiveFilter::class,
+        EloquentSchedulePostFilter::class,
+        EloquentHotFilter::class,
+        EloquentCategoryIdFilter::class,
+    ];
 }

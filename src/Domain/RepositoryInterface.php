@@ -5,6 +5,7 @@ namespace Henry\Domain;
 
 
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
@@ -26,6 +27,12 @@ interface RepositoryInterface
      * @return LengthAwarePaginator
      */
     public function withPaginate(array $conditions = [], $perPage = 15): LengthAwarePaginator;
+
+    /**
+     * @param array $conditions
+     * @return Builder
+     */
+    public function generateQueryBuilder(array $conditions): Builder;
 
     /**
      * @param array $data

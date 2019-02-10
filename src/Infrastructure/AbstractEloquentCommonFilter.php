@@ -6,10 +6,10 @@ namespace Henry\Infrastructure;
 use Illuminate\Database\Eloquent\Builder;
 
 /**
- * Class AbstractEloquentNormalFilter
+ * Class AbstractEloquentCommonFilter
  * @package Henry\Infrastructure
  */
-abstract class AbstractEloquentNormalFilter
+abstract class AbstractEloquentCommonFilter
 {
     protected $searchField;
     protected $field;

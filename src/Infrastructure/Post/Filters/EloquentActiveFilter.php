@@ -5,13 +5,13 @@ namespace Henry\Infrastructure\Post\Filters;
 
 
 use Henry\Domain\Post\Filters\PostFilterInterface;
-use Henry\Infrastructure\AbstractEloquentNormalFilter;
+use Henry\Infrastructure\AbstractEloquentCommonFilter;
 
 /**
  * Class EloquentActiveFilter
  * @package Henry\Infrastructure\Post\Filters
  */
-class EloquentActiveFilter extends AbstractEloquentNormalFilter implements PostFilterInterface
+class EloquentActiveFilter extends AbstractEloquentCommonFilter implements PostFilterInterface
 {
     protected $searchField = 'active';
     protected $field = 'active';

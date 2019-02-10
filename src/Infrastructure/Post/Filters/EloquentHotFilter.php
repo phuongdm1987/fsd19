@@ -5,13 +5,13 @@ namespace Henry\Infrastructure\Post\Filters;
 
 
 use Henry\Domain\Post\Filters\PostFilterInterface;
-use Henry\Infrastructure\AbstractEloquentNormalFilter;
+use Henry\Infrastructure\AbstractEloquentCommonFilter;
 
 /**
  * Class EloquentHotFilter
  * @package Henry\Infrastructure\Post\Filters
  */
-class EloquentHotFilter extends AbstractEloquentNormalFilter implements PostFilterInterface
+class EloquentHotFilter extends AbstractEloquentCommonFilter implements PostFilterInterface
 {
     protected $searchField = 'hot';
     protected $field = 'hot';

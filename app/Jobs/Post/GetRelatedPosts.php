@@ -23,16 +23,21 @@ class GetRelatedPosts implements ShouldQueue
      * @var Post
      */
     private $post;
+    /**
+     * @var int
+     */
+    private $limit;
 
     /**
      * Create a new job instance.
      *
      * @param Post $post
+     * @param int $limit
      */
-    public function __construct(Post $post)
+    public function __construct(Post $post, int $limit = 5)
     {
-        //
         $this->post = $post;
+        $this->limit = $limit;
     }
 
     /**
@@ -43,6 +48,16 @@ class GetRelatedPosts implements ShouldQueue
      */
     public function handle(PostRepositoryInterface $postRepository): Collection
     {
-        return $postRepository->getRelatedPosts($this->post);
+        $conditions = [
+            'active' => Post::PUBLISHED,
+            'schedule_post' => ['operator' => '<=', time()],
+            'id' => explode(',', $this->post->related_post),
+            'orderBy' => 'created_at',
+            'order' => 'desc'
+        ];
+
+        $query = $postRepository->generateQueryBuilder($conditions);
+
+        return $query->take($this->limit)->get();
     }
 }

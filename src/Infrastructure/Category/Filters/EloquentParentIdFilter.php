@@ -5,13 +5,13 @@ namespace Henry\Infrastructure\Category\Filters;
 
 
 use Henry\Domain\Category\Filters\CategoryFilterInterface;
-use Henry\Infrastructure\AbstractEloquentNormalFilter;
+use Henry\Infrastructure\AbstractEloquentCommonFilter;
 
 /**
  * Class EloquentParentIdFilter
  * @package Henry\Infrastructure\Category\Filters
  */
-class EloquentParentIdFilter extends AbstractEloquentNormalFilter implements CategoryFilterInterface
+class EloquentParentIdFilter extends AbstractEloquentCommonFilter implements CategoryFilterInterface
 {
     protected $searchField = 'parent_id';
     protected $field = 'parents';

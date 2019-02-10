@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
+use App\Jobs\Post\GetSearchPosts;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
@@ -32,7 +33,7 @@ class SearchController extends WebController
 
         // Posts
         //
-        $posts = $this->mArticle->searchArticles($q_search, 10);
+        $posts = GetSearchPosts::dispatchNow($q_search);
 
         // Users
         $users = $this->mUser->searchUsers($q_search);

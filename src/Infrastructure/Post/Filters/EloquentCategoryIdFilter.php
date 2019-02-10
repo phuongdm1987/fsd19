@@ -5,13 +5,13 @@ namespace Henry\Infrastructure\Post\Filters;
 
 
 use Henry\Domain\Post\Filters\PostFilterInterface;
-use Henry\Infrastructure\AbstractEloquentNormalFilter;
+use Henry\Infrastructure\AbstractEloquentCommonFilter;
 
 /**
  * Class EloquentCategoryIdFilter
  * @package Henry\Infrastructure\Post\Filters
  */
-class EloquentCategoryIdFilter extends AbstractEloquentNormalFilter implements PostFilterInterface
+class EloquentCategoryIdFilter extends AbstractEloquentCommonFilter implements PostFilterInterface
 {
     protected $searchField = 'category_id';
     protected $field = 'category_id';

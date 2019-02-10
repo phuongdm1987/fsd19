@@ -5,13 +5,13 @@ namespace Henry\Infrastructure\Post\Filters;
 
 
 use Henry\Domain\Post\Filters\PostFilterInterface;
-use Henry\Infrastructure\AbstractEloquentNormalFilter;
+use Henry\Infrastructure\AbstractEloquentCommonFilter;
 
 /**
  * Class EloquentSchedulePostFilter
  * @package Henry\Infrastructure\Post\Filters
  */
-class EloquentSchedulePostFilter extends AbstractEloquentNormalFilter implements PostFilterInterface
+class EloquentSchedulePostFilter extends AbstractEloquentCommonFilter implements PostFilterInterface
 {
     protected $searchField = 'schedule_post';
     protected $field = 'schedule_post';

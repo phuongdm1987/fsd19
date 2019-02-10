@@ -17,20 +17,15 @@ use Illuminate\Database\Eloquent\Collection;
 interface PostRepositoryInterface extends RepositoryInterface
 {
     /**
-     * @param int $perPage
-     * @return LengthAwarePaginator
-     */
-    public function getRecommendPosts(int $perPage = 10): LengthAwarePaginator;
-
-    /**
      * @param Category|null $category
      * @return Collection
      */
     public function getTopPosts(Category $category = null): Collection;
 
     /**
-     * @param Post $post
-     * @return Collection
+     * @param string $keyword
+     * @param int $limit
+     * @return LengthAwarePaginator
      */
-    public function getRelatedPosts(Post $post): Collection;
+    public function getBySearch(string $keyword, int $limit = 10): LengthAwarePaginator;
 }

@@ -45,21 +45,6 @@ class EloquentPostRepository extends AbstractEloquentRepository implements PostR
     }
 
     /**
-     * @param int $perPage
-     * @return LengthAwarePaginator
-     */
-    public function getRecommendPosts(int $perPage = 10): LengthAwarePaginator
-    {
-        return $this->withPaginate([
-            'recommend' => Post::RECOMMEND,
-            'active' => Post::PUBLISHED,
-            'schedule_post' => ['operator' => '<=', time()],
-            'orderBy' => 'created_at',
-            'order' => 'desc'
-        ], $perPage);
-    }
-
-    /**
      * @param Category|null $category
      * @return Collection
      */
@@ -83,21 +68,20 @@ class EloquentPostRepository extends AbstractEloquentRepository implements PostR
     }
 
     /**
-     * @param Post $post
-     * @return Collection
+     * @param string $keyword
+     * @param int $limit
+     * @return LengthAwarePaginator
      */
-    public function getRelatedPosts(Post $post): Collection
+    public function getBySearch(string $keyword, int $limit = 10): LengthAwarePaginator
     {
-        $conditions = [
-            'active' => Post::PUBLISHED,
-            'schedule_post' => ['operator' => '<=', time()],
-            'id' => explode(',', $post->related_post),
-            'orderBy' => 'created_at',
-            'order' => 'desc'
-        ];
-
-        $query = $this->generateQueryBuilder($conditions);
-
-        return $query->take(5)->get();
+        return $this->model
+            ->where('schedule_post', '<=', time())
+            ->where('active', 1)
+            ->where(function ($query) use ($keyword) {
+                $query->where('tags', 'like', "%{$keyword}%")
+                    ->orWhere('slug', 'like', "%{$keyword}%");
+            })
+            ->orderByDesc('created_at')
+            ->paginate($limit);
     }
 }

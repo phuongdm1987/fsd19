@@ -1,6 +1,6 @@
 @if ($type != '' && $type != 'user' && $type != 'category')
 	<section class="fsd-box rs-filter">
-		<h1>Tìm kiếm với {{ $type }} <strong class="red">{{ $value_type }}</strong> <small>(có {{ $posts->getTotal() }} bài viết)</small></h1>
+		<h1>Tìm kiếm với {{ $type }} <strong class="red">{{ $value_type }}</strong> <small>(có {{ $posts->count() }} bài viết)</small></h1>
 	</section>
 @endif
 @forelse ($posts as $ind => $p)

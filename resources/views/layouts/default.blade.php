@@ -77,7 +77,7 @@
     <div class="container">
         <div class="row text-center">
             <div class="col-md-12">
-                <h4 class="copyright">Công ty CPTM và DV Nguyên Hà &copy; {{ date('Y')}}</h4>
+                <div class="copyright">Made with <i class="fa fa-heart red"></i></div>
             </div>
         </div>
     </div>

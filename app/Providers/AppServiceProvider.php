@@ -12,6 +12,9 @@ use Henry\Domain\Post\Sorters\PostSorterInterface;
 use Henry\Domain\Tag\Filters\TagFilterInterface;
 use Henry\Domain\Tag\Repositories\TagRepositoryInterface;
 use Henry\Domain\Tag\Sorters\TagSorterInterface;
+use Henry\Domain\User\Filters\UserFilterInterface;
+use Henry\Domain\User\Repositories\UserRepositoryInterface;
+use Henry\Domain\User\Sorters\UserSorterInterface;
 use Henry\Infrastructure\Category\Filters\EloquentCategoryFilter;
 use Henry\Infrastructure\Category\Repositories\EloquentCategoryRepository;
 use Henry\Infrastructure\Category\Sorters\EloquentCategorySorter;
@@ -21,6 +24,9 @@ use Henry\Infrastructure\Post\Sorters\EloquentPostSorter;
 use Henry\Infrastructure\Tag\Filters\EloquentTagFilter;
 use Henry\Infrastructure\Tag\Repositories\EloquentTagRepository;
 use Henry\Infrastructure\Tag\Sorters\EloquentTagSorter;
+use Henry\Infrastructure\User\Filters\EloquentUserFilter;
+use Henry\Infrastructure\User\Repositories\EloquentUserRepository;
+use Henry\Infrastructure\User\Sorters\EloquentUserSorter;
 use Illuminate\Support\ServiceProvider;
 
 /**
@@ -30,17 +36,21 @@ use Illuminate\Support\ServiceProvider;
 class AppServiceProvider extends ServiceProvider
 {
     public $bindings = [
-        TagRepositoryInterface::class => EloquentTagRepository::class,
-        TagFilterInterface::class => EloquentTagFilter::class,
-        TagSorterInterface::class => EloquentTagSorter::class,
+        UserRepositoryInterface::class => EloquentUserRepository::class,
+        UserFilterInterface::class => EloquentUserFilter::class,
+        UserSorterInterface::class => EloquentUserSorter::class,
+
+        CategoryRepositoryInterface::class => EloquentCategoryRepository::class,
+        CategoryFilterInterface::class => EloquentCategoryFilter::class,
+        CategorySorterInterface::class => EloquentCategorySorter::class,
 
         PostRepositoryInterface::class => EloquentPostRepository::class,
         PostFilterInterface::class => EloquentPostFilter::class,
         PostSorterInterface::class => EloquentPostSorter::class,
 
-        CategoryRepositoryInterface::class => EloquentCategoryRepository::class,
-        CategoryFilterInterface::class => EloquentCategoryFilter::class,
-        CategorySorterInterface::class => EloquentCategorySorter::class,
+        TagRepositoryInterface::class => EloquentTagRepository::class,
+        TagFilterInterface::class => EloquentTagFilter::class,
+        TagSorterInterface::class => EloquentTagSorter::class,
     ];
 
     /**

@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace App\Http\Controllers;
 
 use App\Jobs\Post\GetSearchPosts;
+use App\Jobs\User\GetSearchUsers;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
@@ -23,7 +24,6 @@ class SearchController extends WebController
         $q_search = str_slug($q);
 
         // Metadata
-        //
         $title = 'Tìm kiếm theo từ khóa <span class="head-kw">' . $q . '</span>';
         $desc = 'Tìm kiếm và tổng hợp các bài viết, hướng dẫn, kiến thức, thảo luận cơ bản các vấn đề, đề tài theo từ khóa ' . $q;
 
@@ -32,15 +32,11 @@ class SearchController extends WebController
         $this->metadata->appendKeywords(['bài viết', 'thảo luận', 'hướng dẫn', 'kiến thức', 'hỏi đáp', $q]);
 
         // Posts
-        //
         $posts = GetSearchPosts::dispatchNow($q_search);
-
-        // Users
-        $users = $this->mUser->searchUsers($q_search);
 
         $type = 'từ khóa';
         $value_type = $q;
 
-        return view('frontend/home/search', compact('posts', 'users', 'type', 'value_type'));
+        return view('search', compact('posts', 'type', 'value_type'));
     }
 }

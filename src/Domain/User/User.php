@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace Henry\Domain\User;
 
+use Henry\Domain\FollowUser\FollowUser;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -34,12 +36,22 @@ class User extends Authenticatable
     ];
 
     /**
+     * Get the route key for the model.
+     *
+     * @return string
+     */
+    public function getRouteKeyName(): string
+    {
+        return 'username';
+    }
+
+    /**
      * Url to home page of user
      * @return string
      */
     public function getHomePageUrl(): string
     {
-        return '/@' . $this->username;
+        return route('users.show', $this->username);
     }
 
     /**
@@ -74,5 +86,21 @@ class User extends Authenticatable
     public function nickName(): string
     {
         return $this->nickname;
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function followers(): HasMany
+    {
+        return $this->hasMany(FollowUser::class, 'friend_id');
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function followings(): HasMany
+    {
+        return $this->hasMany(FollowUser::class, 'user_id');
     }
 }

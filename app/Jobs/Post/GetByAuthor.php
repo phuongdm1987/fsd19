@@ -5,6 +5,7 @@ namespace App\Jobs\Post;
 
 use Henry\Domain\Post\Post;
 use Henry\Domain\Post\Repositories\PostRepositoryInterface;
+use Henry\Domain\User\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Queue\SerializesModels;
@@ -13,24 +14,30 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 
 /**
- * Class GetRecommendPosts
+ * Class GetByAuthor
  * @package App\Jobs\Post
  */
-class GetRecommendPosts implements ShouldQueue
+class GetByAuthor implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
     /**
+     * @var User
+     */
+    private $user;
+    /**
      * @var int
      */
-    private $perPage;
+    private $limit;
 
     /**
-     * GetRecommendPosts constructor.
-     * @param int $perPage
+     * Create a new job instance.
+     * @param User $user
+     * @param int $limit
      */
-    public function __construct(int $perPage = 10)
+    public function __construct(User $user, int $limit = 10)
     {
-        $this->perPage = $perPage;
+        $this->user = $user;
+        $this->limit = $limit;
     }
 
     /**
@@ -40,12 +47,12 @@ class GetRecommendPosts implements ShouldQueue
     public function handle(PostRepositoryInterface $postRepository): LengthAwarePaginator
     {
         $posts = $postRepository->withPaginate([
-            'recommend' => Post::RECOMMEND,
+            'user_id' => $this->user->id,
             'active' => Post::PUBLISHED,
             'schedule_post' => ['operator' => '<=', time()],
             'orderBy' => 'created_at',
             'order' => 'desc'
-        ], $this->perPage);
+        ], $this->limit);
 
         $posts->load('author', 'category', 'relationTags', 'favoriteUsers');
 

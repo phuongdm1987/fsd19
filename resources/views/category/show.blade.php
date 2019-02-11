@@ -10,9 +10,7 @@
 			@include('commons.breadcrumb')
 		</section>
 	@endif
-	@if($category->id !== 3)
-		@include('commons.listing')
-	@endif
+	@include('commons.listing')
 @stop
 
 @section('right_sidebar')

@@ -54,8 +54,8 @@
 <!-- Navigation -->
 @include('commons/navigation')
 
-@if($type == 'user')
-    @include('/frontend/user-wall/header-wall')
+@if($type === 'user')
+    @include('user.header-wall')
 @endif
 
 <section id="content" class="container">

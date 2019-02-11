@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace App\Jobs\Post;
 
+use Henry\Domain\Post\Post;
 use Henry\Domain\Post\Repositories\PostRepositoryInterface;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
@@ -44,8 +45,17 @@ class GetByCategory implements ShouldQueue
      */
     public function handle(PostRepositoryInterface $postRepository): LengthAwarePaginator
     {
-        return $postRepository->withPaginate([
-            'category_id' => $this->categoryIds
+        $posts = $postRepository->withPaginate([
+            'category_id' => $this->categoryIds,
+            'active' => Post::PUBLISHED,
+            'schedule_post' => ['operator' => '<=', time()],
+            'recommend' => Post::RECOMMEND,
+            'orderBy' => 'created_at',
+            'order' => 'desc'
         ], $this->limit);
+
+        $posts->load('author', 'category', 'relationTags', 'favoriteUsers');
+
+        return $posts;
     }
 }

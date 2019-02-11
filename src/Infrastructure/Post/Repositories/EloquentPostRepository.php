@@ -9,6 +9,7 @@ use Henry\Domain\Post\Post;
 use Henry\Domain\Post\Filters\PostFilterInterface;
 use Henry\Domain\Post\Repositories\PostRepositoryInterface;
 use Henry\Domain\Post\Sorters\PostSorterInterface;
+use Henry\Domain\Tag\Tag;
 use Henry\Infrastructure\AbstractEloquentRepository;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Collection;
@@ -80,6 +81,23 @@ class EloquentPostRepository extends AbstractEloquentRepository implements PostR
             ->where(function ($query) use ($keyword) {
                 $query->where('tags', 'like', "%{$keyword}%")
                     ->orWhere('slug', 'like', "%{$keyword}%");
+            })
+            ->orderByDesc('created_at')
+            ->paginate($limit);
+    }
+
+    /**
+     * @param Tag $tag
+     * @param int $limit
+     * @return LengthAwarePaginator
+     */
+    public function getByTag(Tag $tag, int $limit = 20): LengthAwarePaginator
+    {
+        return $this->model
+            ->where('schedule_post', '<=', time())
+            ->where('active', 1)
+            ->whereHas('relationTags', function ($query) use ($tag) {
+                $query->where('slug', $tag->getSlug());
             })
             ->orderByDesc('created_at')
             ->paginate($limit);

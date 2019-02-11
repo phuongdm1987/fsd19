@@ -7,6 +7,7 @@ namespace Henry\Domain\Post\Repositories;
 use Henry\Domain\Category\Category;
 use Henry\Domain\Post\Post;
 use Henry\Domain\RepositoryInterface;
+use Henry\Domain\Tag\Tag;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Collection;
 
@@ -28,4 +29,11 @@ interface PostRepositoryInterface extends RepositoryInterface
      * @return LengthAwarePaginator
      */
     public function getBySearch(string $keyword, int $limit = 10): LengthAwarePaginator;
+
+    /**
+     * @param Tag $tag
+     * @param int $limit
+     * @return LengthAwarePaginator
+     */
+    public function getByTag(Tag $tag, int $limit = 20): LengthAwarePaginator;
 }

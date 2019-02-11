@@ -15,6 +15,7 @@ class EloquentPostFilter extends AbstractEloquentFilter implements PostFilterInt
 {
     protected $filters = [
         EloquentIdFilter::class,
+        EloquentUserIdFilter::class,
         EloquentRecommendFilter::class,
         EloquentActiveFilter::class,
         EloquentSchedulePostFilter::class,

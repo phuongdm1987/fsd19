@@ -5,7 +5,7 @@ $(function() {
 	});
 
 	$('img').on('error', function() {
-		$(this).attr('src', '/assets/img/150x150.gif');
+		$(this).attr('src', '/img/150x150.gif');
 	})
 
 	$(".dropdown").hover(

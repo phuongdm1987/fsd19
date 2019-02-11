@@ -12,29 +12,29 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 
 /**
- * Class GetSearchPosts
+ * Class GetByCategory
  * @package App\Jobs\Post
  */
-class GetSearchPosts implements ShouldQueue
+class GetByCategory implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
     /**
-     * @var string
+     * @var array
      */
-    private $keyword;
+    private $categoryIds;
     /**
      * @var int
      */
     private $limit;
 
     /**
-     * Create a new job instance.
-     * @param string $keyword
+     * GetByCategory constructor.
+     * @param array $categoryIds
      * @param int $limit
      */
-    public function __construct(string $keyword, int $limit = 10)
+    public function __construct(array $categoryIds = [], $limit = 10)
     {
-        $this->keyword = $keyword;
+        $this->categoryIds = $categoryIds;
         $this->limit = $limit;
     }
 
@@ -44,9 +44,8 @@ class GetSearchPosts implements ShouldQueue
      */
     public function handle(PostRepositoryInterface $postRepository): LengthAwarePaginator
     {
-        $posts = $postRepository->getBySearch($this->keyword, $this->limit);
-        $posts->load('author', 'relationTags', 'category');
-
-        return $posts;
+        return $postRepository->withPaginate([
+            'category_id' => $this->categoryIds
+        ], $this->limit);
     }
 }

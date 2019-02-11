@@ -58,7 +58,7 @@
     @include('/frontend/user-wall/header-wall')
 @endif
 
-<section id="content" class="container-fluid">
+<section id="content" class="container">
 
 <!-- Main content -->
     <section class="main-side col-sm-9">

@@ -47,9 +47,6 @@
          <div class="pull-left"><button id="btn-recommend" data-post="{{ $post->id }}" data-token="{{ csrf_token() }}" class="pdetail-btn-recommend fsd-btn-recommend"><i class="fa {{ $post->isFavorite() ? 'fa-heart fsd-heart' : 'fa-heart-o' }}"></i> Recommend</button></div>
          <div class="fb-like" data-href="{{ Request::url() }}" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
       </div>
-      <div class="fsd-box">
-         <iframe width="694" height="200" src="http://lap.lazada.com/banner/dynamic.php?banner_id=57105989dbd78&theme=1&p=1" frameborder="0" scrolling="no"></iframe>
-      </div>
 
 		@if($relatedPosts)
             <hr><h3>Tham khảo thêm các bài viết sau:</h3>

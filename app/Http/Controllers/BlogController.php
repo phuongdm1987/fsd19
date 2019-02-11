@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
-use App\Jobs\Category\GetCategoriesForBreadcrumb;
+use App\Jobs\Category\GetParents;
 use App\Jobs\Post\GetRecommendPosts;
 use App\Jobs\Post\GetRelatedPosts;
 use App\Jobs\Post\GetTopPosts;
@@ -44,7 +44,7 @@ class BlogController extends WebController
 
         // Increment views
         IncrementViewPost::dispatchNow($post);
-        $breadcrumbs = GetCategoriesForBreadcrumb::dispatchNow($post->category);
+        $breadcrumbs = GetParents::dispatchNow($post->category);
         $topPosts = GetTopPosts::dispatchNow($post->category);
         $relatedPosts = GetRelatedPosts::dispatchNow($post);
 

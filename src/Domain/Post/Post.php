@@ -44,14 +44,14 @@ class Post extends Model
 
     /**
      * Return the post thumbnail image url.
-     *
+     * @param string $type
      * @return string
      */
     public function thumbnail($type = ''): string
     {
-        return $this->thumbnail !== null
+        return $this->thumbnail !== ''
             ? '/images/' . $type . $this->thumbnail
-            : '/assets/img/150x150.gif';
+            : '/img/150x150.gif';
     }
 
     /**

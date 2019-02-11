@@ -11,10 +11,10 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 
 /**
- * Class GetCategoriesForBreadcrumb
+ * Class GetParents
  * @package App\Jobs\Category
  */
-class GetCategoriesForBreadcrumb implements ShouldQueue
+class GetParents implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
     /**
@@ -38,23 +38,23 @@ class GetCategoriesForBreadcrumb implements ShouldQueue
      */
     public function handle(): array
     {
-        $breadcrumbs = [$this->category];
+        $parents = [$this->category];
 
-        return $this->getParents($this->category, $breadcrumbs);
+        return $this->getParents($this->category, $parents);
     }
 
     /**
      * @param Category $category
-     * @param array $breadcrumbs
+     * @param array $parents
      * @return array
      */
-    private function getParents(Category $category, array &$breadcrumbs): array
+    private function getParents(Category $category, array &$parents): array
     {
         if ($category->parents > 0) {
-            $breadcrumbs[] = $category->relationParent;
-            $this->getParents($category->relationParent, $breadcrumbs);
+            $parents[] = $category->relationParent;
+            $this->getParents($category->relationParent, $parents);
         }
 
-        return array_reverse($breadcrumbs);
+        return array_reverse($parents);
     }
 }

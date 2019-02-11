@@ -15,5 +15,6 @@ declare(strict_types=1);
 Route::get('/', 'BlogController@index')->name('home');
 Route::get('/post/{post}-{slug}', 'BlogController@show')->name('posts.show');
 Route::get('/search', 'SearchController@index')->name('quickSearch');
+Route::get('/danh-muc/{category}-{name}', 'CategoryController@show')->name('categories.show');
 
 Auth::routes();

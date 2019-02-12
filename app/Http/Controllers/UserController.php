@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 
 use App\Jobs\Post\GetByAuthor;
 use App\Jobs\Post\GetTopPosts;
+use App\Jobs\User\GetFollowers;
+use App\Jobs\User\GetFollowings;
 use Henry\Domain\User\User;
 use Illuminate\View\View;
 
@@ -48,7 +50,12 @@ class UserController extends WebController
         return view('user.show', compact('posts', 'title', 'type' ,'user', 'value_type', 'topPosts'));
     }
 
-    public function showFollowers()
+    /**
+     * @param User $user
+     * @param string $follow
+     * @return View
+     */
+    public function showFollow(User $user, string $follow): View
     {
         // Metadata
         //
@@ -69,41 +76,12 @@ class UserController extends WebController
         $type = 'user';
         $value_type ='';
 
-        if ($follow === '') {
-            // Get posts
-            $posts = GetByAuthor::dispatchNow($user);
-
-            // Get top 5 hot the blog post
-            $topPosts = GetTopPosts::dispatchNow();
-
-            // Show the page
-            return view('user.show', compact('posts', 'title', 'type' ,'user', 'value_type', 'topPosts'));
-
+        if ($follow === 'followers') {
+            $list_user_follower = GetFollowers::dispatchNow($user);
+        } else {
+            $list_user_follower = GetFollowings::dispatchNow($user);
         }
 
-        if($follow === 'followers' || $follow === 'following') {
-            $list_user_follower = [];
-            $list_object_user = [];
-
-            $list_object_user = $this->mFollow->getUserFollowings($user, 15, ['cover','gravatar', 'nickname', 'id', 'hobbies']);
-            if($follow === 'followers'){
-                $list_object_user = $this->mFollow->getUserFollowers($user, 15, ['cover','gravatar', 'nickname', 'id', 'hobbies']);
-            }
-
-            foreach ($list_object_user as $key => $object_user) {
-                if($author = $this->mUser->getUserById($object_user->id)){
-                    $list_user_follower[$object_user->id][] = $author;
-                }
-            }
-
-            return view('user-wall/follower', compact('user', 'type', 'value_type',  'list_object_user', 'list_user_follower', 'follow'));
-        }
-
-        if($follow === 'recommend') {
-            return $this->getRecommendPosts([
-                'user'       => $user,
-                'value_type' => $value_type
-            ]);
-        }
+        return view('user.follower', compact('user', 'type', 'value_type', 'list_user_follower', 'follow'));
     }
 }

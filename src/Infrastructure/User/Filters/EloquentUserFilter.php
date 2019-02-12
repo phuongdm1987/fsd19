@@ -13,5 +13,7 @@ use Henry\Infrastructure\AbstractEloquentFilter;
  */
 class EloquentUserFilter extends AbstractEloquentFilter implements UserFilterInterface
 {
-
+    protected $filters = [
+        EloquentIdFilter::class
+    ];
 }

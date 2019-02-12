@@ -15,12 +15,12 @@
 		<ul class="list-inline">
 			<li>
 				<a
-						href="{{$user->getHomePageUrl('followers')}}"
+						href="{{$user->getFollowPageUrl('followers')}}"
 						class="link-title"> {{$user->followers->count()}} Follow</a>
 			<li>
 			<li>
 				<a
-						href="{{$user->getHomePageUrl('following')}}"
+						href="{{$user->getFollowPageUrl('following')}}"
 						class="link-title"> {{$user->followings->count()}} Following</a>
 			<li>
 		</ul>

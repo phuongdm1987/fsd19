@@ -18,5 +18,6 @@ Route::get('/search', 'SearchController@index')->name('quickSearch');
 Route::get('/danh-muc/{category}-{name}', 'CategoryController@show')->name('categories.show');
 Route::get('/tag/{tag}', 'TagController@show')->name('categories.show');
 Route::get('/user/{user}', 'UserController@show')->name('users.show');
+Route::get('/user/{user}/{follow}', 'UserController@showFollow')->name('users.follow');
 
 Auth::routes();

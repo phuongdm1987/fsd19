@@ -55,6 +55,17 @@ class User extends Authenticatable
     }
 
     /**
+     * @param string $follow
+     * @return string
+     */
+    public function getFollowPageUrl(string $follow = 'followers'): string
+    {
+        $follow = \in_array($follow, ['followers', 'following']) ? $follow : 'followers';
+
+        return route('users.follow', [$this->username, $follow]);
+    }
+
+    /**
      * Returns the user Gravatar image url.
      *
      * @return string

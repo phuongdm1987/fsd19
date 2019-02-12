@@ -19,5 +19,7 @@ Route::get('/danh-muc/{category}-{name}', 'CategoryController@show')->name('cate
 Route::get('/tag/{tag}', 'TagController@show')->name('categories.show');
 Route::get('/user/{user}', 'UserController@show')->name('users.show');
 Route::get('/user/{user}/{follow}', 'UserController@showFollow')->name('users.follow');
+Route::post('/subscribe', 'SubscriberController@subscribe')->name('subscribes.subscribe');
+Route::post('/rss', 'rSSController@subscribe')->name('rss.index');
 
 Auth::routes();

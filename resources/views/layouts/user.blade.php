@@ -85,7 +85,7 @@
 					@elseif ($message = session('success'))
 						<p class="text-success mg-bt-0 mg-t-5"><small>{{ $message }}</small></p>
 					@endif
-					<form class="form-inline" method="POST" id="subscribe-form" action="{{ route('subscribe') }}#subscribe-form">
+					<form class="form-inline" method="POST" id="subscribe-form" action="{{ route('subscribes.subscribe') }}#subscribe-form">
 						<div class="form-group">
 							<input type="email" class="form-control input-md" id="subscriber" name="subscriber" placeholder="vnfsd14@gmail.com" required>
 							<input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -100,7 +100,7 @@
 						</li>
 						<li><a href="https://plus.google.com/u/0/communities/103694226235937430493" class="btn btn-link" target="_blank"><i class="fa fa-google"></i></a>
 						</li>
-						<li><a href="{{ route('rss') }}" class="btn btn-link" target="_blank"><i class="fa fa-rss"></i></a>
+						<li><a href="{{ route('rss.index') }}" class="btn btn-link" target="_blank"><i class="fa fa-rss"></i></a>
 						</li>
 					</ul>
 				</div>
@@ -132,6 +132,5 @@
 	<script src="{{ asset('js/follower.js') }}"></script>
 	<script src="{{ asset('js/app.js') }}"></script>
 	@yield('scripts')
-	{{ $metadata->getGACode() }}
 </body>
 </html>

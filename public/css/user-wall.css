@@ -1,0 +1,233 @@
+.header-wrapper{
+	width: 100%;
+	display: block;
+	margin-top: -20px;
+}
+.fsd-coverPicker{
+	position: relative;
+	height: 350px;
+	width: 100%;
+	overflow: hidden;
+	transition: height .25s linear;
+	transform: translate3d(0,0,0);
+}
+.fsdCoverOuter{
+	background: 50% 50% no-repeat;
+	display: block;
+	height: 100%;
+}
+.fsdCoverOuter.fsd-cover{
+	background-size: cover;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+}
+.fsd-contentOuter{
+	max-width: 768px;
+	min-width: 320px;
+	position: relative;
+	margin-left: auto;
+	margin-right: auto;
+	padding: 1px 20px;
+}
+.coverPickerControls{
+	position: absolute;
+	display: block;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+}
+.coverPickerControls input[type='file']{
+	width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+.coverPickerControls > i{
+	margin-top: 25px;
+	color: #fff;
+	margin-left: 20px;
+}
+.fsd-action-controls{
+	position: absolute;
+	bottom: 10px;
+	left: 2%;
+	z-index: 99;
+}
+.fsd-avatarPicker{
+	position: absolute;
+	top: -80px;
+	left: 50%;
+	margin-left: -65px;
+	border-radius: 50%;
+}
+.fsd-avatar-image {
+	background-size: cover;
+	width: 128px;
+	height: 128px;
+	display: block;
+	position: absolute;
+	top: 0px;
+  	border: 3px solid rgb(250, 250, 250);
+}
+.avatarPickerControls{
+	display: block;
+	width: 128px;
+	height: 128px;
+	margin: auto;
+	z-index: 6;
+	position: absolute;
+	top: 0;
+	background: rgba(0, 0, 0, 0.4);
+	color: rgb(255, 255, 255);
+	border-radius: 50%;
+	margin-left: 0px;
+}
+.fsd-icon-upload > i{
+	margin-top: 50px;
+}
+.avatarPickerControls .fsd-avatar{
+	position: absolute;
+	top: 0;
+	right: 0;
+	margin: 0;
+	cursor: pointer;
+	opacity: 0;
+	filter: alpha(opacity=0);
+	width: 140px;
+	height: 140px;
+	display: block;
+	border-radius: 50%;
+}
+.fsd-introductUser{
+	margin-top: 60px;
+	display: block;
+	position: relative;
+}
+
+/*Mobile - tablet*/
+@media (max-width: 768px) {
+	.fsd-coverPicker {
+	  height: 250px;
+	}
+	.coverPickerControls{
+		top: 5%;
+  		left: 45%;
+	}
+}
+@media (max-width: 480px) {
+	.fsd-coverPicker {
+	  height: 200px;
+	}
+}
+@media (max-width: 320px) {
+	.fsd-coverPicker {
+	  height: 180px;
+	}
+	.coverPickerControls{
+		top: 0;
+	}
+}
+
+/* Follower and Following and UnFollow*/
+.js-active-follower > .following-label, .js-active-follower > .unfollow-label,
+.js-active-unfollower > .follow-label, .js-active-unfollower > .unfollow-label,
+.js-active-unfollower:hover > .following-label{
+	display: none;
+}
+.js-active-unfollower:hover{
+	color: rgb(255, 255, 255);
+	background-color: rgb(214, 44, 26);
+	border-color: rgb(182, 37, 22);
+}
+.js-active-unfollower:hover > .unfollow-label{
+	display: block;
+}
+
+/*
+* Edit profile
+*/
+.profile-block {
+	background-color: #fff;
+	display: block;
+	padding: 10px;
+}
+.fsd-listMenu {
+	padding: 10px 0px 0px 0px;
+  margin-bottom: 10px;
+  border-bottom: 1px solid rgb(39, 174, 96);
+  display: block;
+  overflow: hidden;
+}
+.f-updateProfile {
+	margin-top: 20px;
+}
+.fsd-listMenu a {
+	display: inline-block;
+	padding: 10px;
+}
+.fsd-listMenu a.active, .fsd-listMenu a:hover{
+	background: rgb(39, 174, 96);
+	color: rgb(255, 255, 255);
+	border-radius: 4px 4px 0px 0px;
+}
+/*
+* Follower and Following
+*/
+.follower-item {
+	display: block;
+	overflow: hidden;
+}
+.follower-item > .fsd-box {
+	height: 250px;
+}
+.fsd-photo-author {
+	position: relative;
+	width: 100%;
+	height: 150px;
+}
+.author-cover {
+	width: 100%;
+	height: 120px;
+	background-size: cover;
+	display: block;
+	cursor: pointer;
+}
+.fsd-photo-author .author-avatar{
+	width: 80px;
+	height: 80px;
+	display: block;
+	position: absolute;
+	top: 48%;
+	left: 10%;
+	border: 2px solid rgb(255, 255, 255);
+	border-radius: 50%;
+}
+.fsd-photo-author .js-btn-follow {
+	margin: 8px 8px 0px 0px;
+	float: right;
+}
+.fsd-content-author {
+	display: block;
+	position: relative;
+	padding: 10px;
+}
+.fsd-content-author h3.title-author{
+	margin-top: 0;
+}
+.title-author{
+	font-family: Roboto,sans-serif;
+	font-weight: 300;
+	color: rgb(52, 73, 94);
+}
+
+/*
+* Blog Author
+*/
+.fsd-content .title-post {
+	margin: 0;
+}
+.table> thead > .fsd-thead >th {
+	border-bottom: none;
+}

@@ -48,7 +48,7 @@ class GetFollowings implements ShouldQueue
      */
     public function handle(UserRepositoryInterface $userRepository): LengthAwarePaginator
     {
-        $followerIds = $this->user->followings->pluck('id');
+        $followerIds = $this->user->followings->pluck('friend_id')->toArray();
 
         return $userRepository->withPaginate([
             'id' => $followerIds

@@ -9,6 +9,9 @@ use Henry\Domain\Category\Sorters\CategorySorterInterface;
 use Henry\Domain\Post\Filters\PostFilterInterface;
 use Henry\Domain\Post\Repositories\PostRepositoryInterface;
 use Henry\Domain\Post\Sorters\PostSorterInterface;
+use Henry\Domain\Subscriber\Filters\SubscriberFilterInterface;
+use Henry\Domain\Subscriber\Repositories\SubscriberRepositoryInterface;
+use Henry\Domain\Subscriber\Sorters\SubscriberSorterInterface;
 use Henry\Domain\Tag\Filters\TagFilterInterface;
 use Henry\Domain\Tag\Repositories\TagRepositoryInterface;
 use Henry\Domain\Tag\Sorters\TagSorterInterface;
@@ -21,6 +24,9 @@ use Henry\Infrastructure\Category\Sorters\EloquentCategorySorter;
 use Henry\Infrastructure\Post\Filters\EloquentPostFilter;
 use Henry\Infrastructure\Post\Repositories\EloquentPostRepository;
 use Henry\Infrastructure\Post\Sorters\EloquentPostSorter;
+use Henry\Infrastructure\Subscriber\Filters\EloquentSubscriberFilter;
+use Henry\Infrastructure\Subscriber\Repositories\EloquentSubscriberRepository;
+use Henry\Infrastructure\Subscriber\Sorters\EloquentSubscriberSorter;
 use Henry\Infrastructure\Tag\Filters\EloquentTagFilter;
 use Henry\Infrastructure\Tag\Repositories\EloquentTagRepository;
 use Henry\Infrastructure\Tag\Sorters\EloquentTagSorter;
@@ -51,6 +57,10 @@ class AppServiceProvider extends ServiceProvider
         TagRepositoryInterface::class => EloquentTagRepository::class,
         TagFilterInterface::class => EloquentTagFilter::class,
         TagSorterInterface::class => EloquentTagSorter::class,
+
+        SubscriberRepositoryInterface::class => EloquentSubscriberRepository::class,
+        SubscriberFilterInterface::class => EloquentSubscriberFilter::class,
+        SubscriberSorterInterface::class => EloquentSubscriberSorter::class,
     ];
 
     /**

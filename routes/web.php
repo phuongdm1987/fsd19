@@ -20,6 +20,11 @@ Route::get('/tag/{tag}', 'TagController@show')->name('categories.show');
 Route::get('/user/{user}', 'UserController@show')->name('users.show');
 Route::get('/user/{user}/{follow}', 'UserController@showFollow')->name('users.follow');
 Route::post('/subscribe', 'SubscriberController@subscribe')->name('subscribes.subscribe');
-Route::post('/rss', 'rSSController@subscribe')->name('rss.index');
+
+Route::get('/unsubscribe/{subscriber}', 'SubscriberController@unSubscribe')
+    ->name('subscribes.unsubscribe');
+
+Route::get('/rss', 'RssController@index')->name('rss.index');
+Route::get('/account', 'AccountController@index')->name('account.index');
 
 Auth::routes();

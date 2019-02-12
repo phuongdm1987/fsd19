@@ -6,23 +6,19 @@ namespace App\Jobs\Post;
 use Henry\Domain\Post\Post;
 use Henry\Domain\Post\Repositories\PostRepositoryInterface;
 use Illuminate\Bus\Queueable;
-use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 
 /**
- * Class GetRelatedPosts
+ * Class GetRssPosts
  * @package App\Jobs\Post
  */
-class GetRelatedPosts implements ShouldQueue
+class GetRssPosts implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
-    /**
-     * @var Post
-     */
-    private $post;
     /**
      * @var int
      */
@@ -30,33 +26,25 @@ class GetRelatedPosts implements ShouldQueue
 
     /**
      * Create a new job instance.
-     * @param Post $post
      * @param int $limit
      */
-    public function __construct(Post $post, int $limit = 5)
+    public function __construct(int $limit = 25)
     {
-        $this->post = $post;
         $this->limit = $limit;
     }
 
     /**
-     * Execute the job.
-     *
      * @param PostRepositoryInterface $postRepository
-     * @return Collection
+     * @return LengthAwarePaginator
      */
-    public function handle(PostRepositoryInterface $postRepository): Collection
+    public function handle(PostRepositoryInterface $postRepository): LengthAwarePaginator
     {
-        $conditions = [
+        return $postRepository->withPaginate([
+            'recommend' => Post::RECOMMEND,
             'active' => Post::PUBLISHED,
             'schedule_post' => ['operator' => '<=', time()],
-            'id' => explode(',', $this->post->related_post),
             'orderBy' => 'created_at',
             'order' => 'desc'
-        ];
-
-        $query = $postRepository->generateQueryBuilder($conditions);
-
-        return $query->take($this->limit)->get();
+        ], $this->limit);
     }
 }

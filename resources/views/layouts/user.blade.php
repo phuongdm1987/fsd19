@@ -80,15 +80,22 @@
 				</div>
 				<div class="col-md-12">
 					<p>Đăng ký nhận bản tin miễn phí</p>
-					@if ($message = session('error'))
-						<p class="text-danger mg-bt-0 mg-t-5"><small>{{ $message }}</small></p>
-					@elseif ($message = session('success'))
-						<p class="text-success mg-bt-0 mg-t-5"><small>{{ $message }}</small></p>
+					@if ($errors->any())
+						<div class="alert alert-danger">
+							<ul>
+								@foreach ($errors->all() as $error)
+									<li>{{ $error }}</li>
+								@endforeach
+							</ul>
+						</div>
+					@endif
+					@if (session('success'))
+						<p class="text-success mg-bt-0 mg-t-5"><small>{{ session('success') }}</small></p>
 					@endif
 					<form class="form-inline" method="POST" id="subscribe-form" action="{{ route('subscribes.subscribe') }}#subscribe-form">
 						<div class="form-group">
-							<input type="email" class="form-control input-md" id="subscriber" name="subscriber" placeholder="vnfsd14@gmail.com" required>
-							<input type="hidden" name="_token" value="{{ csrf_token() }}">
+							{{csrf_field()}}
+							<input type="email" class="form-control input-md" id="email" name="email" placeholder="vnfsd14@gmail.com" required>
 						</div>
 						<button type="submit" id="btn-subscribe" class="btn btn-danger btn-md">Subscribe</button>
 					</form>

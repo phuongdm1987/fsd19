@@ -77,7 +77,7 @@
     <div class="container">
         <div class="row text-center">
             <div class="col-md-12">
-                <div class="copyright">Viet Nam Full-stack developer &copy; {{ date('Y')}}</div>
+                <div class="copyright">Viet Nam Full-stack developer &copy; {{date('Y')}}</div>
             </div>
         </div>
     </div>

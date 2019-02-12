@@ -8,7 +8,6 @@ use Henry\Domain\Tag\Tag;
 use Henry\Domain\Tag\Filters\TagFilterInterface;
 use Henry\Domain\Tag\Repositories\TagRepositoryInterface;
 use Henry\Domain\Tag\Sorters\TagSorterInterface;
-use Henry\Domain\Tag\ValueObjects\Type;
 use Henry\Infrastructure\AbstractEloquentRepository;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\DB;

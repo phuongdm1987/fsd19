@@ -6,6 +6,8 @@ php:
 before_script:
   - composer self-update
   - composer install --no-interaction
+  - cp .env.testing .env
+  - touch storage/database_test.sqlite
   - php artisan migrate --database=sqlite --force
 
 script:

@@ -28,16 +28,22 @@ class GetByAuthor implements ShouldQueue
      * @var int
      */
     private $limit;
+    /**
+     * @var array
+     */
+    private $conditions;
 
     /**
      * Create a new job instance.
      * @param User $user
      * @param int $limit
+     * @param array $conditions
      */
-    public function __construct(User $user, int $limit = 10)
+    public function __construct(User $user, int $limit = 10, $conditions = [])
     {
         $this->user = $user;
         $this->limit = $limit;
+        $this->conditions = $conditions;
     }
 
     /**
@@ -46,13 +52,17 @@ class GetByAuthor implements ShouldQueue
      */
     public function handle(PostRepositoryInterface $postRepository): LengthAwarePaginator
     {
-        $posts = $postRepository->withPaginate([
+        $conditions = [
             'user_id' => $this->user->id,
             'active' => Post::PUBLISHED,
             'schedule_post' => ['operator' => '<=', time()],
             'orderBy' => 'created_at',
             'order' => 'desc'
-        ], $this->limit);
+        ];
+
+        $conditions = array_merge($conditions, $this->conditions);
+
+        $posts = $postRepository->withPaginate($conditions, $this->limit);
 
         $posts->load('author', 'category', 'relationTags', 'favoriteUsers');
 

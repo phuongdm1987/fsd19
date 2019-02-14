@@ -8,9 +8,9 @@ use Henry\Domain\Category\Category;
 use Henry\Domain\Category\Filters\CategoryFilterInterface;
 use Henry\Domain\Category\Repositories\CategoryRepositoryInterface;
 use Henry\Domain\Category\Sorters\CategorySorterInterface;
-use Henry\Domain\Category\ValueObjects\Type;
 use Henry\Infrastructure\AbstractEloquentRepository;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Collection as SupportCollection;
 use Illuminate\Support\Facades\DB;
 
 /**
@@ -54,5 +54,38 @@ class EloquentCategoryRepository extends AbstractEloquentRepository implements C
             'orderBy' => 'name',
             'order' => 'asc'
         ]);
+    }
+
+    /**
+     * @param int $currentId
+     * @param string $strLevel
+     * @param SupportCollection|null $categories
+     * @param string $html
+     * @return string
+     */
+    public function generateSelectBox(
+        int $currentId = 0,
+        string $strLevel = '&rarr;',
+        SupportCollection $categories = null,
+        string &$html = ''): string
+    {
+        if ($categories === null) {
+            $categories = $this->model->where('parents', 0)->get();
+        }
+
+        if ($categories) {
+            return $html;
+        }
+
+        foreach ($categories as $category) {
+            $isSelected = $category->id === $currentId ? 'selected="true"' : '';
+            $html .= '<option value="' . $category->id . '"' . $isSelected . '>' . $strLevel . $category->name . '</option>';
+            if ($category->children) {
+                $strLevel .= $strLevel;
+                $this->generateSelectBox($currentId, $strLevel, $category->children, $html);
+            }
+        }
+
+        return $html;
     }
 }

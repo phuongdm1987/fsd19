@@ -133,7 +133,7 @@
 	<script src="{{ asset('js/jquery.countdown.min.js') }}"></script>
 	<!--JS For Page User-->
 	<script src="{{ asset('js/jquery.ui.widget.js') }}"></script>
-{{--  	<script src="{{ asset('js/jquery.fileupload.js') }}"></script>--}}
+  	<script src="{{ asset('js/jquery.fileupload.js') }}"></script>
   	<script src="{{ asset('js/jquery.bootstrap-growl.min.js') }}"></script>
 	<script src="{{ asset('js/user-wall.js') }}"></script>
 	<script src="{{ asset('js/follower.js') }}"></script>

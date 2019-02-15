@@ -91,6 +91,13 @@
 <script src="{{ asset('js/app14.js') }}"></script>
 <script src="{{ asset('js/recommend.js') }}"></script>
 <script src="{{ asset('js/recommend.handler.js') }}"></script>
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-2371173440240668",
+        enable_page_level_ads: true
+    });
+</script>
 @yield('scripts')
 </body>
 </html>

@@ -37,7 +37,7 @@
          <section id="account-content">
             <section class="container">
                @include('commons.notifications')
-               @if (Request::is('account/posts/create') || Request::is('account/posts/edit/*'))
+               @if (Request::is('account/posts/create') || Request::is('account/posts/*/edit'))
                   @include('account.sidebar')
                @endif
                @yield('content')

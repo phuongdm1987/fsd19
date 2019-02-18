@@ -30,9 +30,13 @@ Route::middleware('auth')->prefix('account')->group(function() {
     Route::get('/', 'AccountController@index')->name('account.index');
     Route::get('/profile', 'AccountController@show')->name('account.show');
     Route::get('/posts', 'AccountController@postIndex')->name('account.posts.index');
-    Route::get('/posts/{post}', 'AccountController@postShow')->name('account.posts.show');
+    Route::get('/posts/{post}', 'AccountController@postShow')
+        ->name('account.posts.show')
+        ->middleware('can:show,post');
     Route::get('/posts/create', 'AccountController@postCreate')->name('account.posts.create');
-    Route::get('/posts/{post}/edit', 'AccountController@postEdit')->name('account.posts.edit');
+    Route::get('/posts/{post}/edit', 'AccountController@postEdit')
+        ->name('account.posts.edit')
+        ->middleware('can:show,post');
     Route::get('/posts/{post}/delete', 'AccountController@postDelete')->name('account.posts.delete');
     Route::post('/posts', 'AccountController@postStore')->name('account.posts.store');
 });

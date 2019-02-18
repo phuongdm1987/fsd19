@@ -23,11 +23,10 @@ class GetParents implements ShouldQueue
     private $category;
 
     /**
-     * Create a new job instance.
-     *
-     * @param Category $category
+     * GetParents constructor.
+     * @param Category|null $category
      */
-    public function __construct(Category $category)
+    public function __construct(Category $category = null)
     {
         //
         $this->category = $category;
@@ -38,6 +37,10 @@ class GetParents implements ShouldQueue
      */
     public function handle(): array
     {
+        if($this->category === null) {
+            return [];
+        }
+
         $parents = [$this->category];
 
         return $this->getParents($this->category, $parents);

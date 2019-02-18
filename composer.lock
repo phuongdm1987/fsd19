@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "8d3409be5b219613fd2f8107ab7d93ef",
+    "content-hash": "c14fd93f3f87b112f89b3b316535e311",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -1516,6 +1516,53 @@
             ],
             "description": "PHP Client for using Nexmo's API.",
             "time": "2019-01-02T09:06:47+00:00"
+        },
+        {
+            "name": "nickcernis/html-to-markdown",
+            "version": "2.2.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/nickcernis/html-to-markdown.git",
+                "reference": "08491df8e9475b219659400edf68416d8044a9db"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/nickcernis/html-to-markdown/zipball/08491df8e9475b219659400edf68416d8044a9db",
+                "reference": "08491df8e9475b219659400edf68416d8044a9db",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3"
+            },
+            "require-dev": {
+                "php": ">=5.3.3",
+                "phpunit/phpunit": "4.*"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "HTML_To_Markdown.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nick Cernis",
+                    "email": "nick@cern.is",
+                    "homepage": "http://modernnerd.net"
+                }
+            ],
+            "description": "An HTML-to-markdown conversion helper for PHP",
+            "homepage": "https://github.com/nickcernis/html-to-markdown",
+            "keywords": [
+                "html",
+                "markdown"
+            ],
+            "abandoned": "league/html-to-markdown",
+            "time": "2015-05-29T13:27:02+00:00"
         },
         {
             "name": "nikic/php-parser",

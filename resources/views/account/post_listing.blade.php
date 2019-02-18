@@ -17,8 +17,8 @@
 					@if (count($posts) > 0)
 						@foreach ($posts as $k => $post)
 							<li {{ ($current_post->id === $post->id) ? 'class="active"' : '' }} >
-								<a href="{{ route('account.posts.show', $post->id) }}" title="{{ $post->title }}">
-									<h3>{{ str_limit($post->title, 8) }}</h3>
+								<a href="{{ route('account.posts.show', $post->id) }}?active={{request('active', 1)}}" title="{{ $post->title }}">
+									<h3>{{ $post->title }}</h3>
 									<p style="font-size: 13px">{{ $post->active === 0 ? 'Bản nháp' : ('Đăng lúc: ' . $post->created_at->format('H:i - d/m/Y') . '<br/>Cập nhật: ' . $post->updated_at->format('H:i d/m/Y')) }}</p>
 								</a>
 							</li>

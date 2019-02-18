@@ -33,7 +33,12 @@ class BlogController extends WebController
         return view('blog.index', compact('type', 'posts', 'topPosts'));
     }
 
-    public function show(Post $post, $slug)
+    /**
+     * @param Post $post
+     * @param $slug
+     * @return View
+     */
+    public function show(Post $post, $slug): View
     {
         // Redirect 301
         if($post->slug !== $slug) {

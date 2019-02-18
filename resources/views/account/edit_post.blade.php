@@ -16,8 +16,9 @@
 
 {{-- Account page content --}}
 @section('content')
-<form id="new-post" action="" method="post">
-	<input type="hidden" name="_token" value="{{ csrf_token() }}">
+<form id="new-post" action="{{route('account.posts.update', $post->id)}}" method="post">
+	{{csrf_field()}}
+	@method('put')
 	<input type="text" name="title" id="post_title" value="{{ $post->title }}" class="txt-box {{ $errors->has('title') ? 'has-error' : '' }}" placeholder="Tiêu đề bài viết">
 	<section class="features">
 		<span id="lbl-save"><i class="fa fa-refresh fa-spin"></i> Saving...</span>
@@ -49,25 +50,24 @@
 							<span class="caret"></span>
 							<span class="sr-only">Chọn hình thức đăng bài</span>
 						</button>
-						<ul id="lst-post-status" class="dropdown-menu" role="menu">
-							<li><a data-status="1" href="#">Đăng bài</a></li>
-							<li><a data-status="0" href="#">Lưu nháp</a></li>
-						</ul>
 					@else
 						<button id="btn-submit-post" type="submit" class="btn btn-danger btn-sm">Lưu nháp</button>
 						<button id="btn-toggle-status" type="button" class="btn btn-danger btn-sm dropdown-toggle" data-toggle="dropdown">
 							<span class="caret"></span>
 							<span class="sr-only">Chọn hình thức đăng bài</span>
 						</button>
-						<ul id="lst-post-status" class="dropdown-menu" role="menu">
-							<li><a data-status="1" href="#">Đăng bài</a></li>
-							<li><a data-status="0" href="#">Lưu nháp</a></li>
-						</ul>
 					@endif
+					<ul id="lst-post-status" class="dropdown-menu" role="menu">
+						<li><a data-status="1" href="#">Đăng bài</a></li>
+						<li><a data-status="0" href="#">Lưu nháp</a></li>
+					</ul>
 					<input type="hidden" value="{{ $post->active }}" id="post_active" name="post_active">
 				</div>
 				<div class="col-sm-2 pull-right">
-					{!! $selectBoxcategories !!}
+					<select name="category_id" id="" class="form-control">
+						<option value="">-- Chọn danh mục --</option>
+						{!! $selectBoxCategories !!}
+					</select>
 				</div>
 				<div class="pull-right">
 					<a class="footer-setting" href="#"><i class="fa fa-wrench"></i></a>

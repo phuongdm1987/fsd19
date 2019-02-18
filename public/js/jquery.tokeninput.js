@@ -471,7 +471,7 @@ $.TokenList = function (input, url_or_data, settings) {
         saved_tokens = saved_tokens.slice(0,selected_token_index).concat([token_data]).concat(saved_tokens.slice(selected_token_index));
         selected_token_index++;
 
-        // Update the hidden input
+        // UpdatePost the hidden input
         update_hidden_input(saved_tokens, hidden_input);
 
         token_count += 1;
@@ -594,7 +594,7 @@ $.TokenList = function (input, url_or_data, settings) {
         saved_tokens = saved_tokens.slice(0,index).concat(saved_tokens.slice(index+1));
         if(index < selected_token_index) selected_token_index--;
 
-        // Update the hidden input
+        // UpdatePost the hidden input
         update_hidden_input(saved_tokens, hidden_input);
 
         token_count -= 1;
@@ -612,7 +612,7 @@ $.TokenList = function (input, url_or_data, settings) {
         }
     }
 
-    // Update the hidden input box value
+    // UpdatePost the hidden input box value
     function update_hidden_input(saved_tokens, hidden_input) {
         var token_values = $.map(saved_tokens, function (el) {
             return el[settings.tokenValue];

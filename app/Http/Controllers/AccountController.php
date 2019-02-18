@@ -3,10 +3,13 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Post\UpdatePostRequest;
 use App\Jobs\Category\GetSelectBox;
 use App\Jobs\Post\GetByAuthor;
+use App\Jobs\Post\UpdatePost;
 use Henry\Domain\Post\Post;
 use Henry\Support\Markdown;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
@@ -72,9 +75,22 @@ class AccountController extends WebController
      */
     public function postEdit(Post $post): View
     {
-        $selectBoxcategories = GetSelectBox::dispatchNow(old('category_id', $post->category_id));
+        $selectBoxCategories = GetSelectBox::dispatchNow(old('category_id', $post->category_id));
         $raw_content = $this->markdown->convertHtmlToMarkdown($post->content);
         $raw_content = htmlspecialchars($raw_content);
-        return view('account.edit_post', compact( 'post', 'raw_content', 'selectBoxcategories'));
+        return view('account.edit_post', compact( 'post', 'raw_content', 'selectBoxCategories'));
+    }
+
+    /**
+     * @param UpdatePostRequest $request
+     * @param Post $post
+     * @return RedirectResponse
+     */
+    public function postUpdate(UpdatePostRequest $request, Post $post): RedirectResponse
+    {
+        $this->dispatchNow(UpdatePost::fromRequest($post, $request));
+
+        return redirect()->route('account.post.edit', $post->id)
+            ->with('success', 'Bài viết của bạn đã được ' . ($post->active === 1 ? 'cập nhật' : 'lưu'));
     }
 }

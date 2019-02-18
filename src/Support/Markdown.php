@@ -45,6 +45,8 @@ class Markdown
      */
     public function convertMarkdownToHtml(string $markdown): string
     {
-        return $this->markdownParser->text($markdown);
+        $html = $this->markdownParser->text($markdown);
+        $html = clean($html, 'markdown');
+        return $html;
     }
 }

@@ -34,11 +34,14 @@ Route::middleware('auth')->prefix('account')->group(function() {
         ->name('account.posts.show')
         ->middleware('can:show,post');
     Route::get('/posts/create', 'AccountController@postCreate')->name('account.posts.create');
+    Route::post('/posts', 'AccountController@postStore')->name('account.posts.store');
     Route::get('/posts/{post}/edit', 'AccountController@postEdit')
         ->name('account.posts.edit')
         ->middleware('can:show,post');
+    Route::match(['put', 'patch'], '/posts/{post}', 'AccountController@postUpdate')
+        ->name('account.posts.update')
+        ->middleware('can:update,post');
     Route::get('/posts/{post}/delete', 'AccountController@postDelete')->name('account.posts.delete');
-    Route::post('/posts', 'AccountController@postStore')->name('account.posts.store');
 });
 
 Auth::routes();

@@ -715,7 +715,7 @@ window.CodeMirror = (function() {
 						}
 					}
 			} else if (nextIntact && nextIntact.from <= lineN && nextIntact.to > lineN) {
-				// This line is intact. Skip to the actual node. Update its
+				// This line is intact. Skip to the actual node. UpdatePost its
 				// line number if needed.
 				while (cur.lineObj != line) cur = rm(cur);
 				if (lineNumbers && updateNumbersFrom <= lineN && cur.lineNumber)
@@ -2896,7 +2896,7 @@ window.CodeMirror = (function() {
 		return obj;
 	}
 
-	// Update the selection. Last two args are only used by
+	// UpdatePost the selection. Last two args are only used by
 	// updateDoc, since they have to be expressed in the line
 	// numbers before the update.
 	function setSelection(doc, anchor, head, bias, checkAtomic) {
@@ -5256,7 +5256,7 @@ window.CodeMirror = (function() {
 		var nextChange = 0,
 			spanStyle, spanEndStyle, spanStartStyle, title, collapsed;
 		for (;;) {
-			if (nextChange == pos) { // Update current marker set
+			if (nextChange == pos) { // UpdatePost current marker set
 				spanStyle = spanEndStyle = spanStartStyle = title = "";
 				collapsed = null;
 				nextChange = Infinity;
@@ -7871,7 +7871,7 @@ var fsdEditor = null;
 						success: function( file, response ){
 							var holderP = $(file.previewElement).closest("p"),
 
-							// Update the image path in markdown
+							// UpdatePost the image path in markdown
 								imgHolderMardown = $(".CodeMirror-code").find('pre').filter(function() {
 									return (/^(?:\{<(.*?)>\})?!(?:\[([^\n\]]*)\])(?:\(([^\n\]]*)\))?$/gim).test(self.text()) && (self.find("span").length === 0);
 								}),

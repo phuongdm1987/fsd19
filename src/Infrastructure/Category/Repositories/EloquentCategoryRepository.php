@@ -58,33 +58,39 @@ class EloquentCategoryRepository extends AbstractEloquentRepository implements C
 
     /**
      * @param int $currentId
-     * @param string $strLevel
+     * @param string $symbol
      * @param SupportCollection|null $categories
      * @param string $html
+     * @param int $level
      * @return string
      */
     public function generateSelectBox(
         int $currentId = 0,
-        string $strLevel = '&rarr;',
+        string $symbol = '&rarr;',
         SupportCollection $categories = null,
-        string &$html = ''): string
+        string &$html = '',
+        int &$level = 0
+    ): string
     {
+        $strLevel = '';
+        for ($i = 0; $i < $level; $i++) {
+            $strLevel .= $symbol;
+        }
+
         if ($categories === null) {
             $categories = $this->model->where('parents', 0)->get();
         }
 
-        if ($categories) {
-            return $html;
-        }
-
         foreach ($categories as $category) {
             $isSelected = $category->id === $currentId ? 'selected="true"' : '';
-            $html .= '<option value="' . $category->id . '"' . $isSelected . '>' . $strLevel . $category->name . '</option>';
+            $html .= '<option name="category_id" value="' . $category->id . '"' . $isSelected . '>' . $strLevel . $category->name . '</option>';
             if ($category->children) {
-                $strLevel .= $strLevel;
-                $this->generateSelectBox($currentId, $strLevel, $category->children, $html);
+                ++$level;
+                $this->generateSelectBox($currentId, $symbol, $category->children, $html, $level);
             }
         }
+
+        --$level;
 
         return $html;
     }

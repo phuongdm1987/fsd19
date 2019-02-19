@@ -16,7 +16,7 @@ Route::get('/', 'BlogController@index')->name('home');
 Route::get('/posts/{post}-{slug}', 'BlogController@show')->name('posts.show');
 Route::get('/search', 'SearchController@index')->name('quickSearch');
 Route::get('/categories/{category}-{name}', 'CategoryController@show')->name('categories.show');
-Route::get('/tag/{tag}', 'TagController@show')->name('categories.show');
+Route::get('/tag/{tag}', 'TagController@show')->name('tags.show');
 Route::get('/user/{user}', 'UserController@show')->name('users.show');
 Route::get('/user/{user}/{follow}', 'UserController@showFollow')->name('users.follow');
 Route::post('/subscribe', 'SubscriberController@subscribe')->name('subscribes.subscribe');
@@ -42,6 +42,14 @@ Route::middleware('auth')->prefix('account')->group(function() {
         ->name('account.posts.update')
         ->middleware('can:update,post');
     Route::get('/posts/{post}/delete', 'AccountController@postDelete')->name('account.posts.delete');
+
+    Route::get('/logout', 'Auth\LoginController@logout')->name('logout.get');
+});
+
+Route::middleware('auth')->prefix('ajax')->namespace('Ajax')->group(function() {
+    Route::post('/posts/recommend', 'PostController@recommend');
+    Route::get('/posts/suggest', 'PostController@getSuggest');
+    Route::get('/tags/suggest', 'TagController@getSuggest');
 });
 
 Auth::routes();

@@ -52,7 +52,7 @@ class Category extends Model
      */
     public function url(): string
     {
-        return '/danh-muc/' . $this->id . '-' . str_slug($this->getName(), '-', 'vi');
+        return route('categories.show', [$this->id, str_slug($this->getName(), '-', 'vi')]);
     }
 
     /**

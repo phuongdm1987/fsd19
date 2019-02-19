@@ -52,7 +52,7 @@
             <hr><h3>Tham khảo thêm các bài viết sau:</h3>
             <ul class="related-posts">
                 @foreach($relatedPosts as $relatedPost)
-                    <li><a href="{{$relatedPost->url()}}" title="{{$post->title}}">{{$post->title}}</a></li>
+                    <li><a href="{{$relatedPost->url()}}" title="{{$relatedPost->title}}">{{$relatedPost->title}}</a></li>
                 @endforeach
             </ul>
         @endif

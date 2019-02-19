@@ -18,4 +18,11 @@ interface TagRepositoryInterface extends RepositoryInterface
      * @return Collection
      */
     public function getTagCountArticles($count = 20): Collection;
+
+    /**
+     * @param string $keyword
+     * @param int $limit
+     * @return Collection
+     */
+    public function getBySearch(string $keyword, int $limit = 5): Collection;
 }

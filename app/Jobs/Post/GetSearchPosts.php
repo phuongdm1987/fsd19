@@ -5,11 +5,10 @@ namespace App\Jobs\Post;
 
 use Henry\Domain\Post\Repositories\PostRepositoryInterface;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Pagination\LengthAwarePaginator;
-use Illuminate\Queue\SerializesModels;
-use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
+use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Queue\SerializesModels;
 
 /**
  * Class GetSearchPosts
@@ -40,13 +39,13 @@ class GetSearchPosts implements ShouldQueue
 
     /**
      * @param PostRepositoryInterface $postRepository
-     * @return LengthAwarePaginator
+     * @return array
      */
-    public function handle(PostRepositoryInterface $postRepository): LengthAwarePaginator
+    public function handle(PostRepositoryInterface $postRepository): array
     {
         $posts = $postRepository->getBySearch($this->keyword, $this->limit);
         $posts->load('author', 'relationTags', 'category');
 
-        return $posts;
+        return $posts->items();
     }
 }

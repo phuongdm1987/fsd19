@@ -22,7 +22,7 @@
 		<div class="form-group">
          <label for="related-suggestion">Tiêu đề hoặc link</label>
          <input type="text" id="related-suggestion" class="form-control typeahead" placeholder="Nhập tiêu đề hoặc link"/>
-         <input type="hidden" name="addition_links" id="addition-links" form="new-post" value="{{ old('addition_links', isset($post) ? $post->related_post : '') }}"/>
+         <input type="hidden" name="addition_links" id="addition-links" form="new-post" value="{{ isset($post) ? $post->related_post : '' }}"/>
          <ul id="addition-link">
          @if (isset($related_posts))
             @foreach($related_posts as $rp)

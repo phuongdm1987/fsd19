@@ -26,11 +26,11 @@
       <header class="header">
          <ul class="list-unstyled">
             <li><a href="/" class="logo" target="_blank">FSD14</a></li>
-            <li><a href="{{ route('account.posts.index') }}"><i class="fa fa-list-alt"></i> Danh sách</a></li>
+            <li><a href="{{ route('account.index') }}"><i class="fa fa-list-alt"></i> Danh sách</a></li>
             <li><a href="{{ route('account.posts.create') }}"><i class="fa fa-pencil"></i> Viết bài</a></li>
             <li><a href="{{ route('account.show') }}"><i class="fa fa-gears"></i> Cài đặt</a></li>
          </ul>
-         <a class="p-act-h pull-right pd-r-20" href="{{ route('logout') }}"><i class="fa fa-sign-out"></i> Thoát</a>
+         <a class="p-act-h pull-right pd-r-20" href="{{ route('logout.get') }}"><i class="fa fa-sign-out"></i> Thoát</a>
          <a class="p-act-h pull-right pd-r-20" href="{{ auth()->user()->getHomePageUrl() }}"><i class="fa fa-home"></i> Trang chủ</a>
       </header>
       <section id="wrapper">

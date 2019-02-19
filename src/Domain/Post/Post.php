@@ -63,7 +63,8 @@ class Post extends Model
         $tag_list = [];
 
         foreach ($this->relationTags as $tag) {
-            $tag_list[] = '<a href="/tag/' . $tag->slug .'" title="' . $tag->name . '">' . $tag->name . '</a>';
+            $url = route('tags.show', $tag->slug);
+            $tag_list[] = '<a href="' . $url .'" title="' . $tag->name . '">' . $tag->name . '</a>';
         }
 
         return implode(' ', $tag_list);

@@ -83,7 +83,7 @@
             $('.date-timer').appendDtpicker();
 
             $('#tags').tagsInput({
-                autocomplete_url: '/account/tags.json',
+                autocomplete_url: '/ajax/tags/suggest',
                 autocomplete:{selectFirst:true, width:'100px', autoFill:true},
                 height: "31px",
                 width: "500px",

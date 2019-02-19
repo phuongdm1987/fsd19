@@ -24,7 +24,7 @@ Recommend.prototype.addRecommendPost = function() {
 	var self = this;
 
 	return $.ajax({
-		url : '/ajax/add-recommend-post',
+		url : '/ajax/posts/recommend',
 		type : 'POST',
 		dataType : 'json',
 		data : self.getDataToSendRequest()

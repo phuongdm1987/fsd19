@@ -41,4 +41,16 @@ class EloquentTagRepository extends AbstractEloquentRepository implements TagRep
             ->orderBy('tag_count', 'DESC')
             ->take($count)->get();
     }
+
+    /**
+     * @param string $keyword
+     * @param int $limit
+     * @return Collection
+     */
+    public function getBySearch(string $keyword, int $limit = 5): Collection
+    {
+        return $this->model
+            ->where('slug', 'like', "%{$keyword}%")
+            ->take($limit)->get();
+    }
 }

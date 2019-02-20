@@ -5,6 +5,7 @@ namespace App\Jobs\Post;
 
 use App\Http\Requests\Post\UpdatePostRequest;
 use Henry\Domain\Post\Post;
+use Henry\Domain\Post\Repositories\PostRepositoryInterface;
 use Henry\Support\Markdown;
 use Illuminate\Bus\Queueable;
 use Illuminate\Queue\SerializesModels;
@@ -35,7 +36,6 @@ class UpdatePost implements ShouldQueue
      */
     public function __construct(Post $post, array $attributes = [])
     {
-        //
         $this->post = $post;
         $this->attributes = $attributes;
     }
@@ -50,41 +50,45 @@ class UpdatePost implements ShouldQueue
         UpdatePostRequest $request
     ): self {
         return new static($post, [
+            'category_id' => $request->categoryId(),
             'title' => $request->title(),
             'content_markdown' => $request->content(),
             'active' => $request->active(),
-            'tags' => $request->tags()
+            'tags' => $request->tags(),
+            'related_post' => $request->relatedPosts(),
+            'org_author' => $request->author(),
+            'org_link' => $request->link(),
+            'schedule_post' => $request->scheduleDate(),
         ]);
     }
 
     /**
      * Execute the job.
      * @param Markdown $markdown
+     * @param PostRepositoryInterface $postRepository
      * @return void
      */
-    public function handle(Markdown $markdown): void
+    public function handle(Markdown $markdown, PostRepositoryInterface $postRepository): void
     {
+        if ($this->post->active === 0 && $this->attributes['active'] === 1) {
+            $this->attributes['created_at'] = now();
+        }
+
         $contentMarkdown = array_get($this->attributes, 'content_markdown', '');
         $this->attributes['content'] = $markdown->convertMarkdownToHtml($contentMarkdown);
         $this->attributes['content'] = preg_replace('/(<pre>)/i', '<pre class="prettyprint">', $this->attributes['content']);
 
         $this->attributes['title'] = clean(array_get($this->attributes, 'title', ''));
-        $this->attributes['slug'] = str_slug($this->attributes['title']);
+        $this->attributes['slug'] = str_slug(array_get($this->attributes, 'title', ''));
+        $this->attributes['related_post'] = clean(array_get($this->attributes, 'related_post', ''));
+        $this->attributes['org_author'] = clean(array_get($this->attributes, 'org_author', ''));
+        $this->attributes['org_link'] = clean(array_get($this->attributes, 'org_link', ''));
+        $this->attributes['schedule_post'] = strtotime(array_get($this->attributes, 'schedule_post', ''));
 
-        //		$this->post->tags       = Xss::clean($request->get("post_tags"));
-        $this->post->related_post     = clean($request->get("addition_links"));
-        $this->post->org_author       = clean($request->get("author"));
-        $this->post->org_link         = clean($request->get("link"));
-        $this->post->schedule_post    = strtotime($request->get('date-timer'));
+        $this->attributes['thumbnail'] = ExtractAvatarInContent::dispatchNow(array_get($this->attributes, 'content', ''));
 
-        if ($active == 0 && $request->get('post_active') == 1) {
-            $this->post->created_at  = now();
-        }
+        $postRepository->update($this->attributes, $this->post);
 
-        $this->post->updated_at = now();
-        $this->post->thumbnail = $this->extractPostAvatar($rendered_content);
-        $this->post->save();
-
-        $this->mArticle->savePostTags($this->post, $request->get('post_tags'));
+        SyncTags::dispatch($this->post, array_get($this->attributes, 'tags', ''));
     }
 }

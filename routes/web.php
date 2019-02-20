@@ -47,8 +47,8 @@ Route::middleware('auth')->prefix('account')->group(function() {
 });
 
 Route::middleware('auth')->prefix('ajax')->namespace('Ajax')->group(function() {
-    Route::post('/posts/recommend', 'PostController@recommend');
-    Route::get('/posts/suggest', 'PostController@getSuggest');
+    Route::post('/posts/recommend', 'BlogController@recommend');
+    Route::get('/posts/suggest', 'BlogController@getSuggest');
     Route::get('/tags/suggest', 'TagController@getSuggest');
 });
 

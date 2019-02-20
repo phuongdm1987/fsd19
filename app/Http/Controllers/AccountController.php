@@ -90,7 +90,7 @@ class AccountController extends WebController
     {
         $this->dispatchNow(UpdatePost::fromRequest($post, $request));
 
-        return redirect()->route('account.post.edit', $post->id)
+        return redirect()->route('account.posts.edit', $post->id)
             ->with('success', 'Bài viết của bạn đã được ' . ($post->active === 1 ? 'cập nhật' : 'lưu'));
     }
 }

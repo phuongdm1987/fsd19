@@ -22,7 +22,7 @@ class Post extends Model
     public const RECOMMEND = 1;
     public const UNRECOMMENDED = 0;
 
-
+    protected $fillable = ['user_id', 'title', 'slug', 'content', 'content_markdown', 'thumbnail', 'active', 'category_id', 'tags', 'schedule_post', 'related_post', 'org_author', 'org_link'];
 
     /**
      * Return publish time of the article
@@ -31,6 +31,14 @@ class Post extends Model
     public function publishTimes(): string
     {
         return $this->created_at->format('H:i - d/m/Y');
+    }
+
+    /**
+     * @return string
+     */
+    public static function getThumbnailUploadPath(): string
+    {
+        return public_path('images/');
     }
 
     /**

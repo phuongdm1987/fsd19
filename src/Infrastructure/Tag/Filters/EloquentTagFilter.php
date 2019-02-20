@@ -13,5 +13,7 @@ use Henry\Infrastructure\AbstractEloquentFilter;
  */
 class EloquentTagFilter extends AbstractEloquentFilter implements TagFilterInterface
 {
-
+    protected $filters = [
+        EloquentNameFilter::class
+    ];
 }

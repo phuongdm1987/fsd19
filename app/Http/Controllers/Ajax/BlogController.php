@@ -10,10 +10,10 @@ use App\Jobs\Post\GetSearchPosts;
 use Illuminate\Http\Request;
 
 /**
- * Class PostController
+ * Class BlogController
  * @package App\Http\Controllers\Api
  */
-class PostController extends Controller
+class BlogController extends Controller
 {
     /**
      * @param AddRecommendRequest $request

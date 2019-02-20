@@ -16,9 +16,9 @@
 
 {{-- Account page content --}}
 @section('content')
-<form id="new-post" action="{{route('account.posts.update', $post->id)}}" method="post">
+<form id="new-post" action="{{route('account.posts.update', $post->id)}}" method="POST">
 	{{csrf_field()}}
-	@method('put')
+	@method('PUT')
 	<input type="text" name="title" id="post_title" value="{{ $post->title }}" class="txt-box {{ $errors->has('title') ? 'has-error' : '' }}" placeholder="Tiêu đề bài viết">
 	<section class="features">
 		<span id="lbl-save"><i class="fa fa-refresh fa-spin"></i> Saving...</span>

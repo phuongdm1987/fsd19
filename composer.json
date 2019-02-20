@@ -15,7 +15,8 @@
         "laravel/tinker": "^1.0",
         "mews/purifier": "^2.1",
         "nickcernis/html-to-markdown": "^2.2",
-        "predis/predis": "^1.1"
+        "predis/predis": "^1.1",
+        "symfony/dom-crawler": "^4.2"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.2",

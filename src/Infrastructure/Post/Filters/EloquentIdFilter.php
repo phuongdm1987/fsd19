@@ -8,7 +8,7 @@ use Henry\Domain\Post\Filters\PostFilterInterface;
 use Henry\Infrastructure\AbstractEloquentCommonFilter;
 
 /**
- * Class EloquentIdFilter
+ * Class EloquentNameFilter
  * @package Henry\Infrastructure\Post\Filters
  */
 class EloquentIdFilter extends AbstractEloquentCommonFilter implements PostFilterInterface

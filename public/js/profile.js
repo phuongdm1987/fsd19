@@ -3,7 +3,6 @@ var relatedLinks = [];
 $(function() {
 	// Nếu có thông tin bài viết liên quan thì fill vào mảng replatedLinks
 	relatedLinks = $('#addition-links').val().split(',');
-	console.log(relatedLinks);
 
 	// Typeahead
 	//
@@ -189,7 +188,6 @@ function addLinkHandle() {
  */
 function removeSeriesItem(obj, id) {
 	var index = relatedLinks.indexOf(id);
-	console.log(relatedLinks, index);
 	if(index > -1) {
 		$(obj).parent('li').remove();
 		relatedLinks.splice(index, 1);

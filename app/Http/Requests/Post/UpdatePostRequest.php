@@ -3,8 +3,6 @@ declare(strict_types=1);
 
 namespace App\Http\Requests\Post;
 
-use Henry\Domain\Post\Post;
-use Henry\Domain\User\User;
 use Illuminate\Foundation\Http\FormRequest;
 
 /**
@@ -15,28 +13,33 @@ class UpdatePostRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
-     * @param User $user
-     * @param Post $post
      * @return bool
      */
-    public function authorize(User $user, Post $post): bool
+    public function authorize(): bool
     {
-        return $user->id === $post->user_id;
+        $post = $this->route('post');
+
+        return $this->user()->id === $post->user_id;
     }
 
     /**
      * Get the validation rules that apply to the request.
-     *
      * @return array
      */
     public function rules(): array
     {
+        $post = $this->route('post');
+
         return [
-            'title' => 'required|string|max:255|unique:posts,title',
+            'category_id' => '|required|integer|exists:categories,id',
+            'title' => 'required|string|max:255|unique:posts,title,' . $post->id,
             'content' => 'required|string',
+            'author' => 'required|string|max:150',
             'post_active' => 'required|boolean',
-            'post_tags' => 'string',
-            'category_id' => '|required|int|exist:categories,id',
+            'post_tags' => 'string|max:255',
+            'addition_links' => 'string|max:255',
+            'link' => 'url|max:255',
+            'date-timer' => 'date|date_format:Y-m-d H:i'
         ];
     }
 
@@ -45,7 +48,7 @@ class UpdatePostRequest extends FormRequest
      */
     public function title(): string
     {
-        return $this->get('title','');
+        return (string)$this->get('title','');
     }
 
     /**
@@ -53,7 +56,15 @@ class UpdatePostRequest extends FormRequest
      */
     public function content(): string
     {
-        return $this->get('content','');
+        return (string)$this->get('content','');
+    }
+
+    /**
+     * @return string
+     */
+    public function author(): string
+    {
+        return (string)$this->get('author', '');
     }
 
     /**
@@ -77,6 +88,30 @@ class UpdatePostRequest extends FormRequest
      */
     public function tags(): string
     {
-        return $this->get('post_tags','');
+        return (string)$this->get('post_tags','');
+    }
+
+    /**
+     * @return string
+     */
+    public function relatedPosts(): string
+    {
+        return (string)$this->get('addition_links','');
+    }
+
+    /**
+     * @return string
+     */
+    public function link(): string
+    {
+        return (string)$this->get('link','');
+    }
+
+    /**
+     * @return string
+     */
+    public function scheduleDate(): string
+    {
+        return (string)$this->get('date-timer', '');
     }
 }

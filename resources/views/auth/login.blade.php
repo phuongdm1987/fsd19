@@ -50,7 +50,7 @@
 
             <section class="form-group">
                 <label for="remember-me" class="checkbox">
-                    <input type="checkbox" name="remember-me" id="remember-me"> Giữ đăng nhập
+                    <input type="checkbox" name="remember" id="remember-me"> Giữ đăng nhập
                 </label>
             </section>
 

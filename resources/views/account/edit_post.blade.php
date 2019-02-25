@@ -16,7 +16,7 @@
 
 {{-- Account page content --}}
 @section('content')
-<form id="new-post" action="{{route('account.posts.update', $post->id)}}" method="POST">
+<form id="new-post" action="{{route('account.blog.update', $post->id)}}" method="POST">
 	{{csrf_field()}}
 	@method('PUT')
 	<input type="text" name="title" id="post_title" value="{{ $post->title }}" class="txt-box {{ $errors->has('title') ? 'has-error' : '' }}" placeholder="Tiêu đề bài viết">

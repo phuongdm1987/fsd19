@@ -15,7 +15,7 @@
 
 {{-- Account page content --}}
 @section('content')
-    <form id="new-post" action="{{route('account.posts.store')}}" method="post">
+    <form id="new-post" action="{{route('account.blog.store')}}" method="post">
         {{csrf_field()}}
         <input type="text" name="title" id="post_title" class="txt-box {{ $errors->has('title') ? 'has-error' : '' }}" placeholder="Tiêu đề bài viết" value="{{old('title', '')}}">
         <section class="features">

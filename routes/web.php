@@ -27,20 +27,32 @@ Route::get('/unsubscribe/{subscriber}', 'SubscriberController@unSubscribe')
 Route::get('/rss', 'RssController@index')->name('rss.index');
 
 Route::middleware('auth')->prefix('account')->group(function() {
-    Route::get('/', 'AccountController@index')->name('account.index');
-    Route::get('/profile', 'AccountController@show')->name('account.show');
-    Route::get('/posts/create', 'AccountController@blogCreate')->name('account.posts.create');
-    Route::get('/posts/{post}', 'AccountController@blogShow')
-        ->name('account.posts.show')
-        ->middleware('can:show,post');
-    Route::post('/posts', 'AccountController@blogStore')->name('account.posts.store');
-    Route::get('/posts/{post}/edit', 'AccountController@blogEdit')
-        ->name('account.posts.edit')
-        ->middleware('can:show,post');
-    Route::match(['put', 'patch'], '/posts/{post}', 'AccountController@blogUpdate')
-        ->name('account.posts.update')
-        ->middleware('can:update,post');
-    Route::get('/posts/{post}/delete', 'AccountController@blogDelete')->name('account.posts.delete');
+    Route::namespace('Account')->group(function() {
+        Route::get('/profile', 'ProfileController@profile')->name('account.show');
+        Route::match(['put', 'patch'], '/profile', 'ProfileController@updateProfile')->name('account.updateProfile');
+        Route::match(['put', 'patch'], '/change-password', 'ProfileController@changePassword')->name('account.changePassword');
+
+        Route::get('/', 'BlogController@index')->name('account.blog.index');
+
+        Route::get('/posts/create', 'BlogController@blogCreate')->name('account.blog.create');
+        Route::post('/posts', 'BlogController@blogStore')->name('account.blog.store');
+
+        Route::get('/posts/{post}', 'BlogController@blogShow')
+            ->name('account.blog.show')
+            ->middleware('can:show,post');
+
+        Route::get('/posts/{post}/edit', 'BlogController@blogEdit')
+            ->name('account.blog.edit')
+            ->middleware('can:show,post');
+        Route::match(['put', 'patch'], '/posts/{post}', 'BlogController@blogUpdate')
+            ->name('account.blog.update')
+            ->middleware('can:update,post');
+
+        Route::get('/posts/{post}/delete', 'BlogController@blogDelete')->name('account.blog.delete');
+    });
+
+
+
 
     Route::get('/logout', 'Auth\LoginController@logout')->name('logout.get');
 });

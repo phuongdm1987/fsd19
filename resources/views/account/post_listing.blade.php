@@ -7,7 +7,7 @@
 			<section class="pl">
 				<section class="post-head">
 					<span class="pd-l-10">Danh sách bài viết</span>
-					<a href="{{ route('account.posts.create') }}" class="pull-right btn btn-success btn-xs btn-new-post"><i class="fa fa-plus"></i></a>
+					<a href="{{ route('account.blog.create') }}" class="pull-right btn btn-success btn-xs btn-new-post"><i class="fa fa-plus"></i></a>
 				</section>
 				<ul id="filter-post" class="list-unstyled">
 					<li><a href="{{ URL::current() }}?active=1" class="{{ request('active', 1) == 1 ? '' : 'deactive' }}">Xuất bản</a></li>
@@ -17,7 +17,7 @@
 					@if (count($posts) > 0)
 						@foreach ($posts as $k => $post)
 							<li {{ ($current_post->id === $post->id) ? 'class="active"' : '' }} >
-								<a href="{{ route('account.posts.show', $post->id) }}?active={{request('active', 1)}}" title="{{ $post->title }}">
+								<a href="{{ route('account.blog.show', $post->id) }}?active={{request('active', 1)}}" title="{{ $post->title }}">
 									<h3>{{ $post->title }}</h3>
 									<p style="font-size: 13px">{{ $post->active === 0 ? 'Bản nháp' : ('Đăng lúc: ' . $post->created_at->format('H:i - d/m/Y') . '<br/>Cập nhật: ' . $post->updated_at->format('H:i d/m/Y')) }}</p>
 								</a>
@@ -35,8 +35,8 @@
 					<section class="post-head">
 						<span>Được viết bởi <a href="{{ $current_post->author->getHomePageUrl() }}" target="_blank">{{ $current_post->author->nickname }}</span>
 						<a href="{{ $current_post->url() }}" class="btn btn-xs pull-right btn-default mg-l-5" target="_blank"><i class="fa fa-eye"></i> Xem</a>
-						<a href="{{ route('account.posts.delete', $current_post->id) }}" class="btn btn-xs pull-right btn-danger btn-delete-action mg-l-5"><i class="fa fa-trash-o"></i> Xóa</a>
-						<a href="{{ route('account.posts.edit', $current_post->id) }}" class="btn btn-xs pull-right btn-primary"><i class="fa fa-pencil"></i> Sửa</a>
+						<a href="{{ route('account.blog.delete', $current_post->id) }}" class="btn btn-xs pull-right btn-danger btn-delete-action mg-l-5"><i class="fa fa-trash-o"></i> Xóa</a>
+						<a href="{{ route('account.blog.edit', $current_post->id) }}" class="btn btn-xs pull-right btn-primary"><i class="fa fa-pencil"></i> Sửa</a>
 					</section>
 					<section id="listing-post-content">
 						{!! $current_post->content !!}

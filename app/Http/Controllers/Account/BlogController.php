@@ -1,8 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Account;
 
+use App\Http\Controllers\WebController;
 use App\Http\Requests\Post\StorePostRequest;
 use App\Http\Requests\Post\UpdatePostRequest;
 use App\Jobs\Category\GetSelectBox;
@@ -17,10 +18,10 @@ use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 /**
- * Class AccountController
+ * Class BlogController
  * @package App\Http\Controllers
  */
-class AccountController extends WebController
+class BlogController extends WebController
 {
     /**
      * @var Markdown
@@ -88,7 +89,7 @@ class AccountController extends WebController
     public function blogStore(StorePostRequest $request): RedirectResponse
     {
         $post = $this->dispatchNow(StorePost::fromRequest($request));
-        return redirect()->route('account.posts.edit', $post->id)
+        return redirect()->route('account.blog.edit', $post->id)
             ->with('success', 'Bài viết của bạn đã được ' . ($post->active == 1 ? 'đăng' : 'lưu'));
     }
 
@@ -113,7 +114,7 @@ class AccountController extends WebController
     {
         $this->dispatchNow(UpdatePost::fromRequest($post, $request));
 
-        return redirect()->route('account.posts.edit', $post->id)
+        return redirect()->route('account.blog.edit', $post->id)
             ->with('success', 'Bài viết của bạn đã được ' . ($post->active === 1 ? 'cập nhật' : 'lưu'));
     }
 
@@ -124,6 +125,6 @@ class AccountController extends WebController
     public function blogDelete(Post $post): RedirectResponse
     {
         DeletePost::dispatchNow($post);
-        return redirect()->route('account.index')->with('success', 'Hoàn thành xóa bài viết.');
+        return redirect()->route('account.blog.index')->with('success', 'Hoàn thành xóa bài viết.');
     }
 }

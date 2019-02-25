@@ -15,9 +15,9 @@
 
 {{-- Account page content --}}
 @section('content')
-    <form id="new-post" action="" method="post">
+    <form id="new-post" action="{{route('account.posts.store')}}" method="post">
         {{csrf_field()}}
-        <input type="text" name="title" id="post_title" class="txt-box {{ $errors->has('title') ? 'has-error' : '' }}" placeholder="Tiêu đề bài viết">
+        <input type="text" name="title" id="post_title" class="txt-box {{ $errors->has('title') ? 'has-error' : '' }}" placeholder="Tiêu đề bài viết" value="{{old('title', '')}}">
         <section class="features">
             <span id="lbl-save"><i class="fa fa-refresh fa-spin"></i> Saving...</span>
             <section class="editor {{ $errors->has('content') ? 'has-error' : '' }}">
@@ -26,7 +26,7 @@
                         <section class="entry-markdown">
                             <header class="editor-header"><span>Nội dung</span></header>
                             <section class="entry-markdown-content">
-                                <textarea id="entry-markdown" name="content" autofocus="true"></textarea>
+                                <textarea id="entry-markdown" name="content" autofocus="true">{{old('content', '')}}</textarea>
                             </section>
                         </section>
                         <section class="entry-preview active">
@@ -54,7 +54,10 @@
                         <input type="hidden" value="0" id="post_active" name="post_active">
                     </div>
                     <div class="col-sm-2 pull-right">
-                        {!! $selectBox !!}
+                        <select name="category_id" id="" class="form-control">
+                            <option value="">-- Chọn danh mục --</option>
+                            {!! $selectBoxCategories !!}
+                        </select>
                     </div>
                     <div class="pull-right">
                         <a class="footer-setting" href="#"><i class="fa fa-wrench"></i></a>

@@ -29,19 +29,18 @@ Route::get('/rss', 'RssController@index')->name('rss.index');
 Route::middleware('auth')->prefix('account')->group(function() {
     Route::get('/', 'AccountController@index')->name('account.index');
     Route::get('/profile', 'AccountController@show')->name('account.show');
-    Route::get('/posts', 'AccountController@postIndex')->name('account.posts.index');
-    Route::get('/posts/{post}', 'AccountController@postShow')
+    Route::get('/posts/create', 'AccountController@blogCreate')->name('account.posts.create');
+    Route::get('/posts/{post}', 'AccountController@blogShow')
         ->name('account.posts.show')
         ->middleware('can:show,post');
-    Route::get('/posts/create', 'AccountController@postCreate')->name('account.posts.create');
-    Route::post('/posts', 'AccountController@postStore')->name('account.posts.store');
-    Route::get('/posts/{post}/edit', 'AccountController@postEdit')
+    Route::post('/posts', 'AccountController@blogStore')->name('account.posts.store');
+    Route::get('/posts/{post}/edit', 'AccountController@blogEdit')
         ->name('account.posts.edit')
         ->middleware('can:show,post');
-    Route::match(['put', 'patch'], '/posts/{post}', 'AccountController@postUpdate')
+    Route::match(['put', 'patch'], '/posts/{post}', 'AccountController@blogUpdate')
         ->name('account.posts.update')
         ->middleware('can:update,post');
-    Route::get('/posts/{post}/delete', 'AccountController@postDelete')->name('account.posts.delete');
+    Route::get('/posts/{post}/delete', 'AccountController@blogDelete')->name('account.posts.delete');
 
     Route::get('/logout', 'Auth\LoginController@logout')->name('logout.get');
 });

@@ -89,13 +89,12 @@ abstract class AbstractEloquentRepository implements RepositoryInterface
     }
 
     /**
-     * @param $id
+     * @param Model $model
      * @return bool|null
      * @throws \Exception
      */
-    public function delete($id): ?bool
+    public function delete(Model $model): ?bool
     {
-        $model = $this->findById($id);
         return $model->delete();
     }
 

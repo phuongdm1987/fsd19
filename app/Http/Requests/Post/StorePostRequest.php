@@ -6,39 +6,37 @@ namespace App\Http\Requests\Post;
 use Illuminate\Foundation\Http\FormRequest;
 
 /**
- * Class UpdatePostRequest
+ * Class StorePostRequest
  * @package App\Http\Requests\Post
  */
-class UpdatePostRequest extends FormRequest
+class StorePostRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
+     *
      * @return bool
      */
     public function authorize(): bool
     {
-        $post = $this->route('post');
-
-        return $this->user()->id === $post->user_id;
+        return true;
     }
 
     /**
      * Get the validation rules that apply to the request.
+     *
      * @return array
      */
     public function rules(): array
     {
-        $post = $this->route('post');
-
         return [
             'category_id' => 'required|integer|exists:categories,id',
-            'title' => 'required|string|max:255|unique:posts,title,' . $post->id,
+            'title' => 'required|string|max:255|unique:posts,title',
             'content' => 'required|string',
             'author' => 'required|string|max:150',
             'post_active' => 'required|boolean',
-            'post_tags' => 'string|max:255',
-            'addition_links' => 'string|max:255',
-            'link' => 'url|max:255',
+            'post_tags' => 'string|nullable|max:255',
+            'addition_links' => 'string|nullable|max:255',
+            'link' => 'url|nullable|max:255',
             'date-timer' => 'date|date_format:Y-m-d H:i'
         ];
     }

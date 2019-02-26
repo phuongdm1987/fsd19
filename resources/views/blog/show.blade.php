@@ -8,7 +8,7 @@
    <meta property="article:published_time" content="{{ $post->created_at }}" />
    <meta property="og:author" content="{{ $post->author->username }}" />
    <meta property="og:image" content="{{ url()->current() . $post->thumbnail }}" />
-   <link href="{{ asset('css/prettify.css') }}" rel="stylesheet">
+   <link href="{{ secure_asset('css/prettify.css') }}" rel="stylesheet">
 @stop
 
 @section('left_sidebar')
@@ -69,7 +69,7 @@
 @stop
 
 @section('scripts')
-	<script src="{{ asset('js/prettify.js') }}" type="text/javascript" charset="utf-8"></script>
+	<script src="{{ secure_asset('js/prettify.js') }}" type="text/javascript" charset="utf-8"></script>
 	<script type="text/javascript">
       $(function() {
           var d = document, s = d.createElement('script');
@@ -81,5 +81,5 @@
       });
 	</script>
     <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-   <script src="{{ asset('js/follower.js') }}" type="text/javascript"></script>
+   <script src="{{ secure_asset('js/follower.js') }}" type="text/javascript"></script>
 @stop

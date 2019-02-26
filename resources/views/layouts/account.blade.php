@@ -7,11 +7,11 @@
       <meta name="author" content="{{ $metadata->getOwner() }}"/>
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-		<link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
-      <link href="{{ asset('css/font-awesome.min.css') }}" rel="stylesheet">
-      <link href="{{ asset('css/ui.css') }}" rel="stylesheet">
-      <link href="{{ asset('css/common.css') }}" rel="stylesheet">
-      <link href="{{ asset('css/profile.css') }}" rel="stylesheet">
+		<link href="{{ secure_asset('css/bootstrap.min.css') }}" rel="stylesheet">
+      <link href="{{ secure_asset('css/font-awesome.min.css') }}" rel="stylesheet">
+      <link href="{{ secure_asset('css/ui.css') }}" rel="stylesheet">
+      <link href="{{ secure_asset('css/common.css') }}" rel="stylesheet">
+      <link href="{{ secure_asset('css/profile.css') }}" rel="stylesheet">
       @yield('styles')
 
 		<!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
@@ -19,7 +19,7 @@
 		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 		<![endif]-->
 
-		<link rel="shortcut icon" href="{{ asset('ico/favicon.png') }}">
+		<link rel="shortcut icon" href="{{ secure_asset('ico/favicon.png') }}">
 	</head>
 
 	<body>
@@ -47,12 +47,12 @@
 
 		<!-- Javascripts
 		================================================== -->
-      <script src="{{ asset('js/jquery.1.10.2.min.js') }}"></script>
-      <script src="{{ asset('js/bootstrap.min.js') }}"></script>
-      <script src="{{ asset('js/ui_datepicker.js') }}"></script>
-      <script src="{{ asset('js/sugar.min.js') }}"></script>
-      <script src="{{ asset('js/typeahead.bundle.min.js') }}"></script>
-      <script src="{{ asset('js/profile.js') }}"></script>
+      <script src="{{ secure_asset('js/jquery.1.10.2.min.js') }}"></script>
+      <script src="{{ secure_asset('js/bootstrap.min.js') }}"></script>
+      <script src="{{ secure_asset('js/ui_datepicker.js') }}"></script>
+      <script src="{{ secure_asset('js/sugar.min.js') }}"></script>
+      <script src="{{ secure_asset('js/typeahead.bundle.min.js') }}"></script>
+      <script src="{{ secure_asset('js/profile.js') }}"></script>
       @yield('scripts')
 	</body>
 </html>

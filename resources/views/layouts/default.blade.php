@@ -21,13 +21,13 @@
     <meta name="twitter:title" content="{{ $metadata->getFullTitle() }}">
     <meta name="twitter:description" content="{{ $metadata->getDescription() }}">
     <meta name="twitter:creator" content="@fsd14">
-    <link rel="icon" href="{{ asset('ico/favicon16.gif') }}" type="image/gif" sizes="16x16">
-    <link rel="icon" href="{{ asset('ico/favicon32.gif') }}" type="image/gif" sizes="32x32">
+    <link rel="icon" href="{{ secure_asset('ico/favicon16.gif') }}" type="image/gif" sizes="16x16">
+    <link rel="icon" href="{{ secure_asset('ico/favicon32.gif') }}" type="image/gif" sizes="32x32">
 
-    <link href="{{ asset('css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
-    <link href="{{ asset('css/jquery.sidr.light.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/fsd14.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/fsd_14.css') }}" rel="stylesheet">
+    <link href="{{ secure_asset('css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ secure_asset('css/jquery.sidr.light.css') }}" rel="stylesheet">
+    <link href="{{ secure_asset('css/fsd14.css') }}" rel="stylesheet">
+    <link href="{{ secure_asset('css/fsd_14.css') }}" rel="stylesheet">
 
     <!-- Custom Fonts -->
     <link href='http://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
@@ -83,14 +83,14 @@
     </div>
 </footer>
 <a href="#" class="scrollToTop"><i class="fa fa-angle-up fa-2x"></i></a>
-<script type="text/javascript" src="{{ asset('js/jquery.js') }}"></script>
-<script type="text/javascript" src="{{ asset('js/bootstrap.min.js') }}"></script>
-<script src="{{ asset('js/prettify.js') }}"></script>
-<script src="{{ asset('js/jquery.plugin.min.js') }}"></script>
-<script src="{{ asset('js/jquery.sidr.min.js') }}"></script>
-<script src="{{ asset('js/app14.js') }}"></script>
-<script src="{{ asset('js/recommend.js') }}"></script>
-<script src="{{ asset('js/recommend.handler.js') }}"></script>
+<script type="text/javascript" src="{{ secure_asset('js/jquery.js') }}"></script>
+<script type="text/javascript" src="{{ secure_asset('js/bootstrap.min.js') }}"></script>
+<script src="{{ secure_asset('js/prettify.js') }}"></script>
+<script src="{{ secure_asset('js/jquery.plugin.min.js') }}"></script>
+<script src="{{ secure_asset('js/jquery.sidr.min.js') }}"></script>
+<script src="{{ secure_asset('js/app14.js') }}"></script>
+<script src="{{ secure_asset('js/recommend.js') }}"></script>
+<script src="{{ secure_asset('js/recommend.handler.js') }}"></script>
 <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 <script>
     (adsbygoogle = window.adsbygoogle || []).push({

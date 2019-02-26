@@ -22,15 +22,15 @@
 	<meta name="twitter:title" content="{{ $metadata->getFullTitle() }}">
 	<meta name="twitter:description" content="{{ $metadata->getDescription() }}">
 	<meta name="twitter:creator" content="@fsd14">
-	<link rel="icon" href="{{ asset('ico/favicon16.gif') }}" type="image/gif" sizes="16x16">
-	<link rel="icon" href="{{ asset('ico/favicon32.gif') }}" type="image/gif" sizes="32x32">
+	<link rel="icon" href="{{ secure_asset('ico/favicon16.gif') }}" type="image/gif" sizes="16x16">
+	<link rel="icon" href="{{ secure_asset('ico/favicon32.gif') }}" type="image/gif" sizes="32x32">
 
-	<link href="{{ asset('css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
-	<link href="{{ asset('css/jquery.sidr.light.css') }}" rel="stylesheet">
-	<link href="{{ asset('css/common.css') }}" rel="stylesheet">
-	<link href="{{ asset('css/fsd14.css') }}" rel="stylesheet">
-	<link href="{{ asset('css/fsd_14.css') }}" rel="stylesheet">
-	<link rel="stylesheet" type="text/css" href="{{ asset('css/user-wall.css') }}">
+	<link href="{{ secure_asset('css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
+	<link href="{{ secure_asset('css/jquery.sidr.light.css') }}" rel="stylesheet">
+	<link href="{{ secure_asset('css/common.css') }}" rel="stylesheet">
+	<link href="{{ secure_asset('css/fsd14.css') }}" rel="stylesheet">
+	<link href="{{ secure_asset('css/fsd_14.css') }}" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="{{ secure_asset('css/user-wall.css') }}">
 	<!-- Custom Fonts -->
 	<link href='http://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
 	<link href="http://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
@@ -122,22 +122,22 @@
 			</div>
 		</div>
 	</footer>
-	<script type="text/javascript" src="{{ asset('js/jquery.js') }}"></script>
-	<script type="text/javascript" src="{{ asset('js/bootstrap.min.js') }}"></script>
-	<script src="{{ asset('js/functions.js') }}"></script>
-	<script src="{{ asset('js/jquery.tokeninput.js') }}"></script>
-	<script src="{{ asset('js/prettify.js') }}"></script>
-	{{-- <script src="{{ asset('js/bootbox.js') }}"></script> --}}
-	<script src="{{ asset('js/jquery.plugin.min.js') }}"></script>
-	<script src="{{ asset('js/jquery.sidr.min.js') }}"></script>
-	<script src="{{ asset('js/jquery.countdown.min.js') }}"></script>
+	<script type="text/javascript" src="{{ secure_asset('js/jquery.js') }}"></script>
+	<script type="text/javascript" src="{{ secure_asset('js/bootstrap.min.js') }}"></script>
+	<script src="{{ secure_asset('js/functions.js') }}"></script>
+	<script src="{{ secure_asset('js/jquery.tokeninput.js') }}"></script>
+	<script src="{{ secure_asset('js/prettify.js') }}"></script>
+	{{-- <script src="{{ secure_asset('js/bootbox.js') }}"></script> --}}
+	<script src="{{ secure_asset('js/jquery.plugin.min.js') }}"></script>
+	<script src="{{ secure_asset('js/jquery.sidr.min.js') }}"></script>
+	<script src="{{ secure_asset('js/jquery.countdown.min.js') }}"></script>
 	<!--JS For Page User-->
-	<script src="{{ asset('js/jquery.ui.widget.js') }}"></script>
-  	<script src="{{ asset('js/jquery.fileupload.js') }}"></script>
-  	<script src="{{ asset('js/jquery.bootstrap-growl.min.js') }}"></script>
-	<script src="{{ asset('js/user-wall.js') }}"></script>
-	<script src="{{ asset('js/follower.js') }}"></script>
-	<script src="{{ asset('js/app.js') }}"></script>
+	<script src="{{ secure_asset('js/jquery.ui.widget.js') }}"></script>
+  	<script src="{{ secure_asset('js/jquery.fileupload.js') }}"></script>
+  	<script src="{{ secure_asset('js/jquery.bootstrap-growl.min.js') }}"></script>
+	<script src="{{ secure_asset('js/user-wall.js') }}"></script>
+	<script src="{{ secure_asset('js/follower.js') }}"></script>
+	<script src="{{ secure_asset('js/app.js') }}"></script>
 	@yield('scripts')
 </body>
 </html>

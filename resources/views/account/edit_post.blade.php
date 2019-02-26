@@ -1,11 +1,11 @@
 @extends('layouts.account')
 
 @section('styles')
-	<link href="{{ asset('css/dropzone.css') }}" media="all" rel="stylesheet">
-	<link href="{{ asset('css/ghostdown.css') }}" media="all" rel="stylesheet">
-	<link href="{{ asset('css/jquery.tagsinput.css') }}" media="all" rel="stylesheet">
-	<link href="{{ asset('css/jquery.simple-dtpicker.css') }}" media="all" rel="stylesheet">
-	<link href="{{ asset('css/jquery-ui.min.css') }}" media="all" rel="stylesheet">
+	<link href="{{ secure_asset('css/dropzone.css') }}" media="all" rel="stylesheet">
+	<link href="{{ secure_asset('css/ghostdown.css') }}" media="all" rel="stylesheet">
+	<link href="{{ secure_asset('css/jquery.tagsinput.css') }}" media="all" rel="stylesheet">
+	<link href="{{ secure_asset('css/jquery.simple-dtpicker.css') }}" media="all" rel="stylesheet">
+	<link href="{{ secure_asset('css/jquery-ui.min.css') }}" media="all" rel="stylesheet">
 	<style>
 		.ui-autocomplete {
 			top: 85% !important;
@@ -82,11 +82,11 @@
 @stop
 
 @section("scripts")
-  <script src="{{ asset('js/dropzone.js') }}"></script>
-  <script src="{{ asset('js/ghostdown.js') }}"></script>
-  <script src="{{ asset('js/jquery.tagsinput.js') }}"></script>
-  <script type='text/javascript' src="{{ asset('js/jquery-ui.min.js') }}"></script>
-  <script type="text/javascript" src="{{ asset('js/jquery.simple-dtpicker.js') }}"></script>
+  <script src="{{ secure_asset('js/dropzone.js') }}"></script>
+  <script src="{{ secure_asset('js/ghostdown.js') }}"></script>
+  <script src="{{ secure_asset('js/jquery.tagsinput.js') }}"></script>
+  <script type='text/javascript' src="{{ secure_asset('js/jquery-ui.min.js') }}"></script>
+  <script type="text/javascript" src="{{ secure_asset('js/jquery.simple-dtpicker.js') }}"></script>
   <script>
 		$(function() {
 			var timing;

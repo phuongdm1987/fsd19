@@ -15,7 +15,7 @@
                      <tr>
                          <td style="padding: 15px;">
                              <a href="{{ route('home') }}?utm_source=email_register_subs&utm_medium=cpc&utm_campaign=email_marketing" style="display:block">
-                                 <img src="{{asset('img/medium_fsd_logo.png')}}" alt="fsd14.com" width="114px" height="40px">
+                                 <img src="{{secure_asset('img/medium_fsd_logo.png')}}" alt="fsd14.com" width="114px" height="40px">
                              </a>
                          </td>
                      </tr>
@@ -27,7 +27,7 @@
                                    <tr>
                                        <td>
                                            <a href="{{ route('home') }}?utm_source=email_register_subs&utm_medium=cpc&utm_campaign=email_marketing" title="Cộng đồng lập trình viên Việt Nam">
-                                               <img src="{{asset('img/fsd_mail_header.jpg')}}" alt="Cộng đồng lập trình viên Việt Nam" width="620" style="display:block; width:100%;">
+                                               <img src="{{secure_asset('img/fsd_mail_header.jpg')}}" alt="Cộng đồng lập trình viên Việt Nam" width="620" style="display:block; width:100%;">
                                            </a>
                                        </td>
                                    </tr>
@@ -43,7 +43,7 @@
                               <tbody>
                                  <tr>
                                      <td>
-                                         
+
                                      </td>
                                  </tr>
                                  <tr>

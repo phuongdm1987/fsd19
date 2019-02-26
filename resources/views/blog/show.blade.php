@@ -27,7 +27,7 @@
         <section class="post-summary">
             <h3>Fsd14</h3>
             <p>
-                Bài viết được đăng trên blog <a href="http://fsd19.com" title="fsd14">Fsd14</a>,
+                Bài viết được đăng trên blog <a href="https://fsd19.com" title="fsd14">Fsd14</a>,
                 các bạn có thể copy về blog của mình hoặc share bất kỳ đâu nhưng
                 vui lòng ghi rõ nguồn về blog fsd14 như một sự tôn trọng công sức biên soạn và dịch bài của tác giả. Cảm ơn các bạn!
             </p>

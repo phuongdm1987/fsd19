@@ -12,7 +12,7 @@
         <image>
             <url>https://files.slack.com/files-pri/T032SJDL8-F04DGPK3R/fsd_mail_header.jpg</url>
             <title>Việt Nam Full Stack Developers</title>
-            <link>http://fsd19.com</link>
+            <link>https://fsd19.com</link>
             <width>170</width>
             <height>170</height>
         </image>

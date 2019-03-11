@@ -25,6 +25,7 @@ Route::get('/unsubscribe/{subscriber}', 'SubscriberController@unSubscribe')
     ->name('subscribes.unsubscribe');
 
 Route::get('/rss', 'RssController@index')->name('rss.index');
+Route::get('/site-map', 'SiteMapController@index');
 
 Route::middleware('auth')->prefix('account')->group(function() {
     Route::namespace('Account')->group(function() {
